@@ -1,16 +1,29 @@
 {
   "extends": [
     "next/core-web-vitals",
-    "@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:drizzle/recommended",
+    "plugin:prettier/recommended"
   ],
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "plugins": [
+    "@typescript-eslint",
+    "react",
+    "react-hooks",
+    "jsx-a11y",
+    "drizzle",
+    "prettier"
+  ],
   "rules": {
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-explicit-any": "warn",
     "@typescript-eslint/prefer-const": "error",
     "prefer-const": "error",
-    "no-var": "error"
+    "no-var": "error",
+    "prettier/prettier": "error"
   },
   "env": {
     "browser": true,
