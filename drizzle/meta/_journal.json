@@ -5,22 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1756604720808,
-      "tag": "0000_peaceful_human_robot",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1756605823933,
-      "tag": "0001_sad_talkback",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1756613295053,
-      "tag": "0002_stormy_firelord",
+      "when": 1756617743443,
+      "tag": "0000_glossy_green_goblin",
       "breakpoints": true
     }
   ]
