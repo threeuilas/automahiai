@@ -8,40 +8,30 @@ First, run the development server:
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app will be hosted on [http://localhost:3000](http://localhost:3000). This command also starts Postgres in the background, and will shut it down on exit (CTRL+C).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Postgres
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Postgres is hosted in Docker. To start the database, use docker-compose:
 
-## Code Quality
-
-This project uses ESLint for code quality and consistency. ESLint is configured with TypeScript support and follows Next.js best practices.
+```bash
+docker-compose up -d
+```
 
 ### ESLint Commands
 
 - `pnpm lint` - Check for linting issues
 - `pnpm lint:fix` - Automatically fix auto-fixable issues
 
-### ESLint Configuration
+### Database Migrations
 
-The ESLint configuration includes:
-- TypeScript support with `@typescript-eslint`
-- Code style rules (single quotes, semicolons, trailing commas)
-- Best practices (no console statements, strict equality, etc.)
-- Automatic ignoring of build outputs and generated files
+This project uses Drizzle for ORM. Schema is stored in `./lib/db/schema`.
 
-## Learn More
+To migrate the database, change the schemas in `./lib/db/schema`, ensure the database is running, then generate and apply the migration:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+$ pnpm generate
+...
+$ pnpm migrate
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
