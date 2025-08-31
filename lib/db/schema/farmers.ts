@@ -1,7 +1,7 @@
-import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
-import { timestamps } from "./helpers";
+import { integer, pgTable, varchar } from 'drizzle-orm/pg-core';
+import { timestamps } from './helpers';
 
-export const farmersTable = pgTable("farmers", {
+export const farmersTable = pgTable('farmers', {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   name: varchar({ length: 255 }).notNull(),
   age: integer().notNull(),
