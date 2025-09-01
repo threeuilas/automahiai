@@ -1,0 +1,54 @@
+# AI Directive for Copilot and Cursor
+
+# Purpose
+
+This project uses an AI directive file to guide code generation and completion tools (such as GitHub Copilot and Cursor) to follow project-specific conventions and best practices.
+
+# General Guidelines
+
+- Use TypeScript and React best practices.
+- Prefer const arrow function components and handlers.
+- Use Prettier formatting (single quotes, trailing commas, etc.).
+- Use Drizzle ORM for all database access.
+- Use UI components from `components/ui` when building new UI.
+- Use path aliases as defined in `tsconfig.json`.
+- Write clear, concise, and well-documented code.
+- Prefer functional, composable code.
+- Use ESLint and Prettier rules as configured in the project.
+
+# Naming
+
+- Use PascalCase for components and files exporting a custom react component.
+- Use camelCase for variables and functions.
+- Use snake_case for database table and column names.
+
+# Imports
+
+- Use absolute imports with `@/` alias for local modules.
+- Group imports: external, then internal, then styles.
+
+# React
+
+- Use function components and hooks.
+- Avoid class components.
+- Use controlled components.
+- Components fall under 2 categories: Elements and Containers. Elements contain styling, and are characterized by having relatively large React return statements but little-to-no logic before the return. Containers are containers for business logic. These use hooks, including custom hooks. Containers should have more code before the return statement, but there should be relatively little React in the return, it should just be either Elements or other Containers.
+- Containers shouldn't have too many hooks directly in them. Extract related logic out to custom hooks where possible.
+- A feature should have its own directory, containing a components, elements, and hooks directory within. Keep components, elements, and hooks within their directories.
+
+# Database
+
+- Use Drizzle ORM schema and relations for all models.
+- Use enums for role fields and other constrained values.
+
+# Comments
+
+- Use JSDoc for exported functions and components.
+- Add comments for non-obvious logic.
+
+# AI Usage
+
+- When generating code, follow the above conventions.
+- When in doubt, prefer clarity and maintainability.
+
+# End of AI Directive
