@@ -19,32 +19,11 @@ import {
   FormControl,
   FormMessage,
 } from '@/components/ui/form';
-import { UseFormReturn } from 'react-hook-form';
+import { useSignupForm } from './useSignupForm';
 import { useRouter } from 'next/navigation';
 
-
-export interface SignupFormValues {
-  name: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-  agreeToTerms: boolean;
-}
-
-
-export interface SignupFormProps {
-  loading?: boolean;
-  error?: string;
-  form: UseFormReturn<SignupFormValues>;
-  onSubmit: (values: SignupFormValues) => void | Promise<void>;
-}
-
-export const SignupForm: React.FC<SignupFormProps> = ({
-  loading = false,
-  error,
-  form,
-  onSubmit,
-}) => {
+export function SignupForm() {
+  const { form, loading, error, signup, fieldErrors } = useSignupForm();
   const router = useRouter();
 
   return (
@@ -54,7 +33,7 @@ export const SignupForm: React.FC<SignupFormProps> = ({
         <CardDescription>Create a new account</CardDescription>
       </CardHeader>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form onSubmit={signup}>
           <CardContent className="flex flex-col gap-4">
             <FormField
               name="name"
@@ -65,7 +44,9 @@ export const SignupForm: React.FC<SignupFormProps> = ({
                   <FormControl>
                     <Input type="text" autoComplete="name" {...field} />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage>
+                    {fieldErrors.name}
+                  </FormMessage>
                 </FormItem>
               )}
             />
@@ -78,7 +59,9 @@ export const SignupForm: React.FC<SignupFormProps> = ({
                   <FormControl>
                     <Input type="email" autoComplete="email" {...field} />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage>
+                    {fieldErrors.email}
+                  </FormMessage>
                 </FormItem>
               )}
             />
@@ -95,7 +78,9 @@ export const SignupForm: React.FC<SignupFormProps> = ({
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage>
+                    {fieldErrors.password}
+                  </FormMessage>
                 </FormItem>
               )}
             />
@@ -112,7 +97,9 @@ export const SignupForm: React.FC<SignupFormProps> = ({
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage>
+                    {fieldErrors.confirmPassword}
+                  </FormMessage>
                 </FormItem>
               )}
             />
@@ -120,16 +107,21 @@ export const SignupForm: React.FC<SignupFormProps> = ({
               name="agreeToTerms"
               control={form.control}
               render={({ field }) => (
-                <FormItem className="flex flex-row items-center gap-2 space-y-0">
-                  <FormControl>
-                    <Checkbox
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                  <FormLabel className="text-sm font-normal select-none cursor-pointer">
-                    I agree to the terms
-                  </FormLabel>
+                <FormItem>
+                  <div className="flex flex-row items-center gap-2 space-y-0">
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                    <FormLabel className="text-sm font-normal select-none cursor-pointer">
+                      I agree to the terms
+                    </FormLabel>
+                  </div>
+                  <FormMessage>
+                    {fieldErrors.agreeToTerms}
+                  </FormMessage>
                 </FormItem>
               )}
             />
@@ -156,4 +148,4 @@ export const SignupForm: React.FC<SignupFormProps> = ({
       </Form>
     </Card>
   );
-};
+}

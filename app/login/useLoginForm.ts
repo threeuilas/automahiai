@@ -10,14 +10,7 @@ interface FormProps {
     remember: boolean;
 }
 
-interface UseLoginFormReturn {
-    loading: boolean;
-    error?: string;
-    login: () => Promise<void>;
-    form: ReturnType<typeof useForm<FormProps>>;
-}
-
-export function useLoginForm(): UseLoginFormReturn {
+export function useLoginForm() {
 
     const router = useRouter();
     const form = useForm<FormProps>({
