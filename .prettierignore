@@ -1,3 +1,6 @@
-# Ignore artifacts:
-build
-coverage
+.next/
+db-data/
+node_modules/
+next-env.d.ts
+drizzle/
+pnpm-lock.yaml
