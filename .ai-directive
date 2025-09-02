@@ -24,17 +24,16 @@ This project uses an AI directive file to guide code generation and completion t
 
 # Imports
 
-- Use absolute imports with `@/` alias for local modules.
+- Use absolute imports with `@/` alias for local modules outside of current directory or children.
 - Group imports: external, then internal, then styles.
 
 # React
 
 - Use function components and hooks.
 - Avoid class components.
-- Use controlled components.
-- Components fall under 2 categories: Elements and Containers. Elements contain styling, and are characterized by having relatively large React return statements but little-to-no logic before the return. Containers are containers for business logic. These use hooks, including custom hooks. Containers should have more code before the return statement, but there should be relatively little React in the return, it should just be either Elements or other Containers.
-- Containers shouldn't have too many hooks directly in them. Extract related logic out to custom hooks where possible.
-- A feature should have its own directory, containing a components, elements, and hooks directory within. Keep components, elements, and hooks within their directories.
+- For forms, prefer the recommended style from react-hook-form (uncontrolled components with refs and registration), unless a controlled component is specifically required.
+- Keep components as simple as possible.
+- Separate business logic from styling: components should not handle both business logic and also have styling elements.
 
 # Database
 

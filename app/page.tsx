@@ -1,12 +1,6 @@
-'use client';
-import { LoginCardElement } from './login/elements/LoginCardElement';
-
-import { useState } from 'react';
+"use client";
 
 export default function Home() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="text-center">
@@ -15,12 +9,6 @@ export default function Home() {
         </h1>
         <p className="text-lg text-gray-600">Your local small farm platform</p>
       </div>
-      <LoginCardElement
-        email={email}
-        password={password}
-        onEmailChange={setEmail}
-        onPasswordChange={setPassword}
-      />
     </div>
   );
 }
