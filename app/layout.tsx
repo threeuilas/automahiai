@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import React from 'react';
+import { auth } from "@/lib/auth"
+import { headers } from "next/headers"
 
 const inter = Inter({
   subsets: ['latin'],
@@ -13,11 +15,16 @@ export const metadata: Metadata = {
   description: 'Automahiʻai',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
+  const session = await auth.api.getSession({
+    headers: await headers()
+  })
+
   return (
     <html lang="en">
       <body className={`${inter.variable} font-sans antialiased bg-white`}>
@@ -27,6 +34,12 @@ export default function RootLayout({
               <div className="flex items-center">
                 <h1 className="text-2xl font-bold text-white">
                   Automahiʻai
+                </h1>
+              </div>
+
+              <div className="flex items-center">
+                <h1>
+                  { session ? `Welcome ${session.user.name}` : 'Not authenticated' }
                 </h1>
               </div>
             </div>
