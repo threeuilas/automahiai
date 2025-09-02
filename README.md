@@ -34,4 +34,3 @@ $ pnpm generate
 ...
 $ pnpm migrate
 ```
-
