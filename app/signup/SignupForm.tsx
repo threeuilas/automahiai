@@ -19,33 +19,32 @@ import {
   FormControl,
   FormMessage,
 } from '@/components/ui/form';
-import { useForm } from 'react-hook-form';
+import { UseFormReturn } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 
-interface SignupFormValues {
+
+export interface SignupFormValues {
+  name: string;
   email: string;
   password: string;
   confirmPassword: string;
   agreeToTerms: boolean;
 }
 
+
 export interface SignupFormProps {
   loading?: boolean;
   error?: string;
+  form: UseFormReturn<SignupFormValues>;
+  onSubmit: (values: SignupFormValues) => void | Promise<void>;
 }
 
 export const SignupForm: React.FC<SignupFormProps> = ({
   loading = false,
   error,
+  form,
+  onSubmit,
 }) => {
-  const form = useForm<SignupFormValues>({
-    defaultValues: {
-      email: '',
-      password: '',
-      confirmPassword: '',
-      agreeToTerms: false,
-    },
-  });
   const router = useRouter();
 
   return (
@@ -55,8 +54,21 @@ export const SignupForm: React.FC<SignupFormProps> = ({
         <CardDescription>Create a new account</CardDescription>
       </CardHeader>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(() => {})}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
           <CardContent className="flex flex-col gap-4">
+            <FormField
+              name="name"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input type="text" autoComplete="name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               name="email"
               control={form.control}

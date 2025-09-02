@@ -7,7 +7,7 @@ import {
   CardContent,
   CardFooter,
   CardDescription,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -20,27 +20,18 @@ import {
   FormControl,
   FormMessage,
 } from '@/components/ui/form';
-import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
+import { useLoginForm } from './useLoginForm';
 
-interface LoginFormValues {
+export interface LoginFormValues {
   email: string;
   password: string;
   remember: boolean;
 }
 
-export interface LoginFormProps {
-  loading?: boolean;
-  error?: string;
-}
 
-export const LoginForm: React.FC<LoginFormProps> = ({
-  loading = false,
-  error,
-}) => {
-  const form = useForm<LoginFormValues>({
-    defaultValues: { email: '', password: '', remember: false },
-  });
+export function LoginForm() {
+  const { form, loading, error, login } = useLoginForm();
   const router = useRouter();
 
   return (
@@ -50,7 +41,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({
         <CardDescription>Sign in to your account</CardDescription>
       </CardHeader>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(() => {})}>
+        <form onSubmit={login}>
           <CardContent className="flex flex-col gap-4">
             <FormField
               name="email"

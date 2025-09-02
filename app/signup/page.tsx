@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { SignupForm } from './SignupForm';
+import {SignupFormContainer} from './SignupFormContainer';
 
 export default function SignupPage() {
-  return <SignupForm />;
+  return <SignupFormContainer />;
 }

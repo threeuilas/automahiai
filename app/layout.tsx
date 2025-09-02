@@ -37,10 +37,22 @@ export default async function RootLayout({
                 </h1>
               </div>
 
-              <div className="flex items-center">
-                <h1>
-                  { session ? `Welcome ${session.user.name}` : 'Not authenticated' }
-                </h1>
+              <div className="flex items-center gap-4">
+                {session ? (
+                  <h1>
+                    {`Welcome ${session.user.name}`}
+                  </h1>
+                ) : (
+                  <>
+                    <span className="text-white">Not authenticated</span>
+                    <a
+                      href="/login"
+                      className="ml-4 px-4 py-2 rounded bg-white text-green-700 font-semibold hover:bg-green-100 transition-colors"
+                    >
+                      Login
+                    </a>
+                  </>
+                )}
               </div>
             </div>
           </div>
