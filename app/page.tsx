@@ -1,4 +1,4 @@
-
+'use client';
 
 export default function Home() {
   return (
@@ -7,9 +7,7 @@ export default function Home() {
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
           Welcome to Automahiʻai
         </h1>
-        <p className="text-lg text-gray-600">
-          Your local small farm platform
-        </p>
+        <p className="text-lg text-gray-600">Your local small farm platform</p>
       </div>
     </div>
   );

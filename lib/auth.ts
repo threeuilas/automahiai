@@ -16,4 +16,4 @@ export const auth = betterAuth({
     plugins: [nextCookies()] // make sure nextCookies is the last plugin in the array
 });
 
-export const { signIn, signUp, useSession } = createAuthClient();
+export const authClient = createAuthClient();

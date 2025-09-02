@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "shadcn": {
+      "command": "/Users/mila/.nvm/versions/node/v22.19.0/bin/npx",
+      "args": ["shadcn@latest", "mcp"]
+    }
+  }
+}
