@@ -1,5 +1,5 @@
-"use client";
-import * as React from "react";
+'use client';
+import * as React from 'react';
 import {
   Card,
   CardHeader,
@@ -7,10 +7,10 @@ import {
   CardContent,
   CardFooter,
   CardDescription,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
+} from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Checkbox } from '@/components/ui/checkbox';
 import {
   Form,
   FormField,
@@ -18,9 +18,9 @@ import {
   FormLabel,
   FormControl,
   FormMessage,
-} from "@/components/ui/form";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
+} from '@/components/ui/form';
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 
 interface SignupFormValues {
   email: string;
@@ -40,9 +40,9 @@ export const SignupForm: React.FC<SignupFormProps> = ({
 }) => {
   const form = useForm<SignupFormValues>({
     defaultValues: {
-      email: "",
-      password: "",
-      confirmPassword: "",
+      email: '',
+      password: '',
+      confirmPassword: '',
       agreeToTerms: false,
     },
   });
@@ -129,13 +129,13 @@ export const SignupForm: React.FC<SignupFormProps> = ({
           </CardContent>
           <CardFooter className="flex flex-col gap-2">
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Signing up..." : "Sign Up"}
+              {loading ? 'Signing up...' : 'Sign Up'}
             </Button>
             <Button
               type="button"
               variant="outline"
               className="w-full"
-              onClick={() => router.push("/login")}
+              onClick={() => router.push('/login')}
             >
               Already have an account? Login
             </Button>
