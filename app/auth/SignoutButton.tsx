@@ -1,24 +1,9 @@
 'use client';
-import { signOut } from '@/auth-client';
 import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/navigation';
+import { useSignout } from './useSignout';
 
-export function SignoutButton() {
-  const router = useRouter();
-  const handleSignOut = async () => {
-    await signOut({
-      fetchOptions: {
-        onSuccess: () => {
-          router.push('/');
-          router.refresh();
-        },
-      },
-    });
-  };
+export const SignoutButton: typeof Button = (props) => {
+  const signout = useSignout();
 
-  return (
-    <Button variant="secondary" onClick={handleSignOut}>
-      Sign Out
-    </Button>
-  );
-}
+  return <Button {...props} onClick={signout} />;
+};
