@@ -1,25 +1,25 @@
-'use client';
-import { useSession } from '@/auth-client';
+import { auth } from '@/lib/auth';
 import { LoginForm } from '../auth/LoginForm';
 import { SignoutButton } from '@/auth/SignoutButton';
-import { Skeleton } from '@/components/ui/skeleton';
+import { headers } from 'next/headers';
 
-export default function LoginPage() {
-  const session = useSession();
-  let content = <LoginForm />;
-  if (session.data) {
-    content = (
-      <div className="flex flex-col items-center gap-4">
-        <div className="text-lg">You are already logged in.</div>
-        <SignoutButton variant="secondary">Sign out</SignoutButton>
-      </div>
-    );
-  } else if (session.isPending) {
-    content = <Skeleton className="h-[50px] w-[200px] rounded-xl" />;
-  }
+export default async function LoginPage() {
+  const session = await auth.api.getSession({ headers: await headers() });
+
   return (
     <div className="flex min-h-screen items-center justify-center p-4 bg-background">
-      {content}
+      {session ? (
+        <div className="flex flex-col items-center gap-4">
+          <div className="text-lg">You are already logged in.</div>
+          <SignoutButton
+            redirect="/login"
+            variant="secondary"
+            text="Sign Out"
+          />
+        </div>
+      ) : (
+        <LoginForm />
+      )}
     </div>
   );
 }

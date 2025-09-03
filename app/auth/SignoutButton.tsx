@@ -1,9 +1,25 @@
 'use client';
-import { Button } from '@/components/ui/button';
+import { Button, ButtonProps } from '@/components/ui/button';
 import { useSignout } from './useSignout';
 
-export const SignoutButton: typeof Button = (props) => {
-  const signout = useSignout();
+interface SignoutButtonProps {
+  redirect?: string;
+  text?: string;
+  loadingText?: string;
+}
 
-  return <Button {...props} onClick={signout} />;
+export const SignoutButton = ({
+  redirect,
+  text,
+  loadingText,
+  ...props
+}: ButtonProps & SignoutButtonProps) => {
+  const { signout, loading } = useSignout(redirect);
+  if (!loadingText) loadingText = text;
+
+  return (
+    <Button {...props} onClick={signout} disabled={loading}>
+      {loading ? loadingText : text}
+    </Button>
+  );
 };
