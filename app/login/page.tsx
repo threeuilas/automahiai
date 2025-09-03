@@ -1,6 +1,9 @@
-import * as React from 'react';
-import { LoginForm } from './LoginForm';
+import { LoginForm } from '../auth/LoginForm';
 
 export default function LoginPage() {
-  return <LoginForm />;
+  return (
+    <div className="flex min-h-screen items-center justify-center p-4 bg-background">
+      <LoginForm />
+    </div>
+  );
 }

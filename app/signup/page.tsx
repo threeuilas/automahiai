@@ -1,6 +1,9 @@
-import * as React from 'react';
-import {SignupForm} from './SignupForm';
+import { SignupForm } from '../auth/SignupForm';
 
 export default function SignupPage() {
-  return <SignupForm/>;
+  return (
+    <div className="flex min-h-screen items-center justify-center p-4 bg-background">
+      <SignupForm />
+    </div>
+  );
 }
