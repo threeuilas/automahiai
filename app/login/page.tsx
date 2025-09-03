@@ -4,7 +4,8 @@ import { SignoutButton } from '@/auth/SignoutButton';
 import { headers } from 'next/headers';
 
 export default async function LoginPage() {
-  const session = await auth.api.getSession({ headers: await headers() });
+  const heads = await headers();
+  const session = await auth.api.getSession({ headers: heads });
 
   return (
     <div className="flex min-h-screen items-center justify-center p-4 bg-background">
@@ -18,7 +19,7 @@ export default async function LoginPage() {
           />
         </div>
       ) : (
-        <LoginForm />
+        <LoginForm redirect={heads.get('referer') || undefined} />
       )}
     </div>
   );
