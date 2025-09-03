@@ -11,9 +11,11 @@ export default async function SignupPage() {
       {session ? (
         <div className="flex flex-col items-center gap-4">
           <div className="text-lg">You are already logged in.</div>
-          <SignoutButton redirect="/signup" variant="secondary">
-            Sign Out
-          </SignoutButton>
+          <SignoutButton
+            redirect="/signup"
+            variant="secondary"
+            text="Sign Out"
+          />
         </div>
       ) : (
         <SignupForm />

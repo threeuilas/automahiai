@@ -39,7 +39,11 @@ export default async function RootLayout({
                 {session ? (
                   <span className="text-white flex items-center gap-3">
                     <span>Welcome {session.user.name}</span>
-                    <SignoutButton variant="secondary">Sign Out</SignoutButton>
+                    <SignoutButton
+                      variant="secondary"
+                      text="Sign Out"
+                      redirect="/"
+                    />
                   </span>
                 ) : (
                   <>
