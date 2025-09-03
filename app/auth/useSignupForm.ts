@@ -25,7 +25,7 @@ const signupSchema = z
 
 type SignupFormValues = z.infer<typeof signupSchema>;
 
-export function useSignupForm() {
+export function useSignupForm(destination: string = '/') {
   const router = useRouter();
   const form = useForm<SignupFormValues>({
     defaultValues: {
@@ -59,9 +59,7 @@ export function useSignupForm() {
     if (result.error) {
       setError(result.error.message);
     } else if (result.data) {
-      console.log(result.data);
-      router.push('/');
-      router.refresh();
+      router.push(destination);
     }
     setLoading(false);
   };

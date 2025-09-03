@@ -13,7 +13,7 @@ const loginSchema = z.object({
 
 type LoginFormValues = z.infer<typeof loginSchema>;
 
-export function useLoginForm() {
+export function useLoginForm(destination: string = '/') {
   const router = useRouter();
   const form = useForm<LoginFormValues>({
     defaultValues: { email: '', password: '', remember: false },
@@ -34,8 +34,7 @@ export function useLoginForm() {
     if (result.error) {
       setError(result.error?.message);
     } else if (result.data) {
-      router.push('/');
-      router.refresh();
+      router.push(destination);
     }
     setLoading(false);
   };

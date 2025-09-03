@@ -4,7 +4,8 @@ import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 
 export default async function SignupPage() {
-  const session = await auth.api.getSession({ headers: await headers() });
+  const heads = await headers();
+  const session = await auth.api.getSession({ headers: heads });
 
   return (
     <div className="flex min-h-screen items-center justify-center p-4 bg-background">
@@ -18,7 +19,7 @@ export default async function SignupPage() {
           />
         </div>
       ) : (
-        <SignupForm />
+        <SignupForm redirect={heads.get('referer') || undefined} />
       )}
     </div>
   );

@@ -21,8 +21,12 @@ import {
 import { useSignupForm } from './useSignupForm';
 import { useRouter } from 'next/navigation';
 
-export function SignupForm() {
-  const { form, loading, error, signup, fieldErrors } = useSignupForm();
+interface SignupFormProps {
+  redirect?: string;
+}
+
+export function SignupForm({ redirect }: SignupFormProps) {
+  const { form, loading, error, signup, fieldErrors } = useSignupForm(redirect);
   const router = useRouter();
 
   return (

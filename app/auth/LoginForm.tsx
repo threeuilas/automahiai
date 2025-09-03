@@ -28,8 +28,12 @@ export interface LoginFormValues {
   remember: boolean;
 }
 
-export function LoginForm() {
-  const { form, loading, error, login } = useLoginForm();
+interface LoginFormProps {
+  redirect?: string;
+}
+
+export function LoginForm({ redirect }: LoginFormProps) {
+  const { form, loading, error, login } = useLoginForm(redirect);
   const router = useRouter();
 
   return (
