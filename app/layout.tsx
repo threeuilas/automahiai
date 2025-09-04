@@ -4,7 +4,8 @@ import './globals.css';
 import React from 'react';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
-import { SignoutButton } from './auth/SignoutButton';
+import { SignoutButton } from '../components/auth/SignoutButton';
+import { LoginButton } from '@/components/auth/LoginButton';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -36,24 +37,18 @@ export default async function RootLayout({
               </div>
 
               <div className="flex items-center gap-4">
+                <a className="text-white" href="/farm">
+                  Farm
+                </a>
                 {session ? (
                   <span className="text-white flex items-center gap-3">
                     <span>Welcome {session.user.name}</span>
-                    <SignoutButton
-                      variant="secondary"
-                      text="Sign Out"
-                      redirect="/"
-                    />
+                    <SignoutButton variant="secondary" text="Sign Out" />
                   </span>
                 ) : (
                   <>
                     <span className="text-white">Not authenticated</span>
-                    <a
-                      href="/login"
-                      className="ml-4 px-4 py-2 rounded bg-white text-green-700 font-semibold hover:bg-green-100 transition-colors"
-                    >
-                      Login
-                    </a>
+                    <LoginButton variant="secondary" text="Login" />
                   </>
                 )}
               </div>

@@ -7,7 +7,6 @@ import {
   CardFooter,
   CardDescription,
 } from '@/components/ui/card';
-
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
@@ -19,32 +18,42 @@ import {
   FormControl,
   FormMessage,
 } from '@/components/ui/form';
+import { useSignupForm } from './useSignupForm';
 import { useRouter } from 'next/navigation';
-import { useLoginForm } from './useLoginForm';
+import { REDIRECT_PARAM } from '../../app/constants';
 
-export interface LoginFormValues {
-  email: string;
-  password: string;
-  remember: boolean;
+interface SignupFormProps {
+  redirect: string;
 }
 
-interface LoginFormProps {
-  redirect?: string;
-}
-
-export function LoginForm({ redirect }: LoginFormProps) {
-  const { form, loading, error, login } = useLoginForm(redirect);
+export function SignupForm({ redirect }: SignupFormProps) {
+  const { form, loading, error, signup, fieldErrors } = useSignupForm(redirect);
   const router = useRouter();
+
+  const loginUrl = `/login?${REDIRECT_PARAM}=${encodeURIComponent(redirect)}`;
 
   return (
     <Card className="max-w-sm w-full mx-auto">
       <CardHeader>
-        <CardTitle>Login</CardTitle>
-        <CardDescription>Sign in to your account</CardDescription>
+        <CardTitle>Sign Up</CardTitle>
+        <CardDescription>Create a new account</CardDescription>
       </CardHeader>
       <Form {...form}>
-        <form onSubmit={login}>
+        <form onSubmit={signup}>
           <CardContent className="flex flex-col gap-4">
+            <FormField
+              name="name"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input type="text" autoComplete="name" {...field} />
+                  </FormControl>
+                  <FormMessage>{fieldErrors.name}</FormMessage>
+                </FormItem>
+              )}
+            />
             <FormField
               name="email"
               control={form.control}
@@ -54,7 +63,7 @@ export function LoginForm({ redirect }: LoginFormProps) {
                   <FormControl>
                     <Input type="email" autoComplete="email" {...field} />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage>{fieldErrors.email}</FormMessage>
                 </FormItem>
               )}
             />
@@ -67,20 +76,37 @@ export function LoginForm({ redirect }: LoginFormProps) {
                   <FormControl>
                     <Input
                       type="password"
-                      autoComplete="current-password"
+                      autoComplete="new-password"
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage>{fieldErrors.password}</FormMessage>
                 </FormItem>
               )}
             />
-            <div className="flex items-center justify-between gap-2">
-              <FormField
-                name="remember"
-                control={form.control}
-                render={({ field }) => (
-                  <FormItem className="flex flex-row items-center gap-2 space-y-0">
+            <FormField
+              name="confirmPassword"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Confirm Password</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="password"
+                      autoComplete="new-password"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage>{fieldErrors.confirmPassword}</FormMessage>
+                </FormItem>
+              )}
+            />
+            <FormField
+              name="agreeToTerms"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex flex-row items-center gap-2 space-y-0">
                     <FormControl>
                       <Checkbox
                         checked={field.value}
@@ -88,20 +114,13 @@ export function LoginForm({ redirect }: LoginFormProps) {
                       />
                     </FormControl>
                     <FormLabel className="text-sm font-normal select-none cursor-pointer">
-                      Remember me
+                      I agree to the terms
                     </FormLabel>
-                  </FormItem>
-                )}
-              />
-              <Button
-                type="button"
-                variant="link"
-                className="p-0 h-auto text-sm"
-                onClick={() => {}}
-              >
-                Forgot password?
-              </Button>
-            </div>
+                  </div>
+                  <FormMessage>{fieldErrors.agreeToTerms}</FormMessage>
+                </FormItem>
+              )}
+            />
             <div className="min-h-[1.5em]">
               {error && (
                 <div className="text-red-500 text-sm break-words">{error}</div>
@@ -110,15 +129,15 @@ export function LoginForm({ redirect }: LoginFormProps) {
           </CardContent>
           <CardFooter className="flex flex-col gap-2">
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? 'Logging in...' : 'Login'}
+              {loading ? 'Signing up...' : 'Sign Up'}
             </Button>
             <Button
               type="button"
               variant="outline"
               className="w-full"
-              onClick={() => router.push('/signup')}
+              onClick={() => router.push(loginUrl)}
             >
-              Sign up
+              Already have an account? Login
             </Button>
           </CardFooter>
         </form>

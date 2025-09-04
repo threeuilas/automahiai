@@ -1,19 +1,19 @@
 'use client';
 import { Button, ButtonProps } from '@/components/ui/button';
 import { useSignout } from './useSignout';
+import { usePathname } from 'next/navigation';
 
 interface SignoutButtonProps {
-  redirect?: string;
   text?: string;
   loadingText?: string;
 }
 
 export const SignoutButton = ({
-  redirect,
   text,
   loadingText,
   ...props
 }: ButtonProps & SignoutButtonProps) => {
+  const redirect = usePathname();
   const { signout, loading } = useSignout(redirect);
   if (!loadingText) loadingText = text;
 

@@ -1,26 +1,14 @@
-import { auth } from '@/lib/auth';
-import { LoginForm } from '../auth/LoginForm';
-import { SignoutButton } from '@/auth/SignoutButton';
-import { headers } from 'next/headers';
+import AuthPage from '@/components/auth/AuthPage';
+import { REDIRECT_PARAM } from '@/constants';
 
-export default async function LoginPage() {
-  const heads = await headers();
-  const session = await auth.api.getSession({ headers: heads });
+interface LoginPageProps {
+  searchParams: Promise<{ [key: string]: string | undefined }>;
+}
 
-  return (
-    <div className="flex min-h-screen items-center justify-center p-4 bg-background">
-      {session ? (
-        <div className="flex flex-col items-center gap-4">
-          <div className="text-lg">You are already logged in.</div>
-          <SignoutButton
-            redirect="/login"
-            variant="secondary"
-            text="Sign Out"
-          />
-        </div>
-      ) : (
-        <LoginForm redirect={heads.get('referer') || undefined} />
-      )}
-    </div>
+export default async function LoginPage({ searchParams }: LoginPageProps) {
+  const redirect = decodeURIComponent(
+    (await searchParams)[REDIRECT_PARAM] || '/',
   );
+
+  return <AuthPage type="login" redirect={redirect} />;
 }
