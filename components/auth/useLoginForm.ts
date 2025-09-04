@@ -35,6 +35,7 @@ export function useLoginForm(destination: string = '/') {
       setError(result.error?.message);
     } else if (result.data) {
       router.push(destination);
+      router.refresh();
     }
     setLoading(false);
   };
