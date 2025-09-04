@@ -21,7 +21,7 @@ import {
 } from '@/components/ui/form';
 import { useRouter } from 'next/navigation';
 import { useLoginForm } from './useLoginForm';
-import { REDIRECT_PARAM } from '../../app/constants';
+import { REDIRECT_PARAM } from './constants';
 
 export interface LoginFormValues {
   email: string;

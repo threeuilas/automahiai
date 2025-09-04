@@ -1,7 +1,7 @@
 'use client';
 import { Button, ButtonProps } from '@/components/ui/button';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { REDIRECT_PARAM } from '../../app/constants';
+import { REDIRECT_PARAM } from './constants';
 
 interface LoginButtonProps {
   text?: string;

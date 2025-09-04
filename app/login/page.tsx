@@ -1,5 +1,5 @@
 import AuthPage from '@/components/auth/AuthPage';
-import { REDIRECT_PARAM } from '@/constants';
+import { REDIRECT_PARAM } from '@/components/auth/constants';
 
 interface LoginPageProps {
   searchParams: Promise<{ [key: string]: string | undefined }>;
