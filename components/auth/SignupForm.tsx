@@ -20,7 +20,7 @@ import {
 } from '@/components/ui/form';
 import { useSignupForm } from './useSignupForm';
 import { useRouter } from 'next/navigation';
-import { REDIRECT_PARAM } from '../../app/constants';
+import { REDIRECT_PARAM } from './constants';
 
 interface SignupFormProps {
   redirect: string;
