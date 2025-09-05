@@ -6,3 +6,6 @@ export const farm = pgTable('farm', {
   name: text('name').notNull(),
   ...timestamps,
 });
+
+export type SelectFarm = typeof farm.$inferSelect;
+export type InsertFarm = typeof farm.$inferInsert;

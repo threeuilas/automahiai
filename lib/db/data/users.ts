@@ -1,9 +1,8 @@
 import { db } from '@/lib/db';
 import { eq } from 'drizzle-orm';
 import { farmUser } from '../schema/farmUser';
-import { Farm } from './types';
 
-export const getUserFarms = async (userId: string): Promise<Farm[]> => {
+export const getUserFarms = async (userId: string) => {
   const res = await db.query.farm.findMany({
     with: {
       farmUser: {
@@ -12,9 +11,5 @@ export const getUserFarms = async (userId: string): Promise<Farm[]> => {
     },
   });
 
-  return res.map((farm) => ({
-    id: farm.id,
-    name: farm.name,
-    createdAt: farm.createdAt,
-  }));
+  return res;
 };
