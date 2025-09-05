@@ -6,6 +6,9 @@
 import type { Config } from 'jest';
 
 import nextJest from 'next/jest.js';
+import { pathsToModuleNameMapper } from 'ts-jest';
+import tsconfig from './tsconfig.json' with { type: 'json' };
+const { compilerOptions } = tsconfig;
 
 const createJestConfig = nextJest({
   // Provide the path to your Next.js app to load next.config.js and .env files in your test environment
@@ -15,6 +18,13 @@ const createJestConfig = nextJest({
 const config: Config = {
   coverageProvider: 'v8',
   testEnvironment: 'jsdom',
+
+  roots: ['<rootDir>'],
+  modulePaths: [compilerOptions.baseUrl],
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
+    prefix: '<rootDir>/',
+  }),
+  preset: 'ts-jest',
 
   // All imported modules in your tests should be mocked automatically
   // automock: false,
@@ -38,9 +48,7 @@ const config: Config = {
   coverageDirectory: 'coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
-  // coveragePathIgnorePatterns: [
-  //   "/node_modules/"
-  // ],
+  coveragePathIgnorePatterns: ['/node_modules/', '/components/ui/'],
 
   // Indicates which provider should be used to instrument code for coverage
   // coverageProvider: "babel",
@@ -190,10 +198,7 @@ const config: Config = {
   // transform: undefined,
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
-  // transformIgnorePatterns: [
-  //   "/node_modules/",
-  //   "\\.pnp\\.[^\\/]+$"
-  // ],
+  transformIgnorePatterns: ['/node_modules/', '\\.pnp\\.[^\\/]+$'],
 
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
   // unmockedModulePathPatterns: undefined,

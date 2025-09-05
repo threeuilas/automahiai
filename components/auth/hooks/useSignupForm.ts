@@ -1,4 +1,4 @@
-import { signUp } from '@/auth-client';
+import { signUp } from '@/lib/auth-client';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -23,7 +23,7 @@ const signupSchema = z
     path: ['confirmPassword'],
   });
 
-type SignupFormValues = z.infer<typeof signupSchema>;
+export type SignupFormValues = z.infer<typeof signupSchema>;
 
 export function useSignupForm(destination: string = '/') {
   const router = useRouter();

@@ -1,7 +1,7 @@
 'use client';
 import { Button, ButtonProps } from '@/components/ui/button';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { REDIRECT_PARAM } from './constants';
+import { REDIRECT_PARAM } from '../constants';
 
 interface LoginButtonProps {
   text?: string;
@@ -24,7 +24,7 @@ export const LoginButton = ({
   let onSubmit = () =>
     router.push(`/login?${REDIRECT_PARAM}=${encodeURIComponent(redirect)}`);
   if (redirect === '/login') {
-    // already there, do nothing
+    // already at /login; do nothing
     onSubmit = () => {};
   }
 

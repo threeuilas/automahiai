@@ -1,6 +1,6 @@
 'use client';
 import { Button, ButtonProps } from '@/components/ui/button';
-import { useSignout } from './useSignout';
+import { useSignout } from '../hooks/useSignout';
 import { usePathname } from 'next/navigation';
 
 interface SignoutButtonProps {
