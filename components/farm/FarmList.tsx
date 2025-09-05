@@ -1,18 +1,7 @@
-interface Farm {
-  id: number;
-  name: string;
-  createdAt: Date;
-  updatedAt: Date | null;
-  deletedAt: Date | null;
-  farmUser: {
-    createdAt: Date;
-    updatedAt: Date | null;
-    userId: string;
-    deletedAt: Date | null;
-    farmId: number;
-    role: 'farmer' | 'customer';
-  }[];
-}
+import { Farm } from '@/lib/db/data/types';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import Link from 'next/link';
 
 interface FarmListProps {
   farms: Farm[];
@@ -20,18 +9,44 @@ interface FarmListProps {
 
 export function FarmList({ farms }: FarmListProps) {
   return (
-    <div className="flex flex-col items-center justify-center">
-      <h1>Farm List</h1>
+    <div className="container mx-auto p-4 max-w-4xl">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold">My Farms</h1>
+        <Button asChild>
+          <Link href="/farm/new">Create Farm</Link>
+        </Button>
+      </div>
+
       {farms.length === 0 ? (
-        <p>No farms found.</p>
+        <Card>
+          <CardHeader>
+            <CardTitle>No farms yet</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground mb-4">
+              You haven't created any farms yet. Create your first farm to get
+              started!
+            </p>
+            <Button asChild>
+              <Link href="/farm/new">Create Your First Farm</Link>
+            </Button>
+          </CardContent>
+        </Card>
       ) : (
-        <ul>
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {farms.map((farm) => (
-            <li key={farm.id}>
-              {farm.name} - Role: {farm.farmUser[0]?.role}
-            </li>
+            <Card key={farm.id} className="hover:shadow-md transition-shadow">
+              <CardHeader>
+                <CardTitle className="text-lg">{farm.name}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  Created: {new Date(farm.createdAt).toLocaleDateString()}
+                </p>
+              </CardContent>
+            </Card>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );

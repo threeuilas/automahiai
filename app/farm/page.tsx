@@ -1,5 +1,5 @@
-import { FarmList } from '@/components/farm';
-import { auth } from '@/lib/auth';
+import { FarmList } from '@/components/farm/FarmList';
+import { auth } from '@/lib/auth-server';
 import { getUserFarms } from '@/lib/db/data/farms';
 import { headers } from 'next/headers';
 
