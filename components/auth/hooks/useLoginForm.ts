@@ -1,4 +1,4 @@
-import { signIn } from '@/auth-client';
+import { signIn } from '@/lib/auth-client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { SubmitErrorHandler, useForm } from 'react-hook-form';

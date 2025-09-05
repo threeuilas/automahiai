@@ -14,6 +14,7 @@ export default defineConfig([
     'drizzle/',
     'node_modules/',
     'next-env.d.ts',
+    'coverage/',
   ]),
   {
     files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],

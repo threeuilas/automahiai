@@ -1,4 +1,4 @@
-import AuthPage from '@/components/auth/AuthPage';
+import AuthPage from '@/components/auth/elements/AuthPage';
 import { REDIRECT_PARAM } from '@/components/auth/constants';
 
 interface SignupPageProps {
@@ -6,9 +6,7 @@ interface SignupPageProps {
 }
 
 export default async function SignupPage({ searchParams }: SignupPageProps) {
-  const redirect = decodeURIComponent(
-    (await searchParams)[REDIRECT_PARAM] || '/',
-  );
+  const redirect = (await searchParams)[REDIRECT_PARAM] || '/';
 
   return <AuthPage type="signup" redirect={redirect} />;
 }
