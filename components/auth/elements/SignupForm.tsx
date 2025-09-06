@@ -19,8 +19,8 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { useSignupForm } from '../hooks/useSignupForm';
-import { useRouter } from 'next/navigation';
 import { REDIRECT_PARAM } from '../constants';
+import Link from 'next/link';
 
 interface SignupFormProps {
   redirect: string;
@@ -28,7 +28,6 @@ interface SignupFormProps {
 
 export function SignupForm({ redirect }: SignupFormProps) {
   const { form, loading, error, signup } = useSignupForm(redirect);
-  const router = useRouter();
 
   const loginUrl = `/login?${REDIRECT_PARAM}=${encodeURIComponent(redirect)}`;
   return (
@@ -133,13 +132,8 @@ export function SignupForm({ redirect }: SignupFormProps) {
               <Button type="submit" className="w-full" disabled={loading}>
                 {loading ? 'Signing up...' : 'Sign Up'}
               </Button>
-              <Button
-                type="button"
-                variant="outline"
-                className="w-full"
-                onClick={() => router.push(loginUrl)}
-              >
-                Already have an account? Login
+              <Button type="button" variant="outline" className="w-full">
+                <Link href={loginUrl}>Already have an account? Login</Link>
               </Button>
             </CardFooter>
           </form>
