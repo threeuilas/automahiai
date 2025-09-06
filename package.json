@@ -14,7 +14,8 @@
     "lint:fix": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
     "migrate": "pnpm exec drizzle-kit migrate",
     "start": "next start",
-    "test": "jest"
+    "test": "jest",
+    "ci": "pnpm run lint && pnpm run test"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",

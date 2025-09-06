@@ -15,6 +15,13 @@ jest.mock('next/link', () => {
   };
 });
 
+// Mock the FarmItem component
+jest.mock('./FarmItem', () => ({
+  FarmItem: jest.fn(({ farm }) => (
+    <div data-testid={`farm-item-${farm.id}`}>{farm.name}</div>
+  )),
+}));
+
 describe('FarmList', () => {
   const mockFarms = [
     {
