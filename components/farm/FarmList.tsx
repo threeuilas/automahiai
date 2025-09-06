@@ -1,23 +1,24 @@
+'use client';
+
 import { Farm } from '@/lib/db/data/types';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
 import { FarmItem } from './FarmItem';
+import { useState } from 'react';
 
 interface FarmListProps {
   farms: Farm[];
 }
 
-export function FarmList({ farms }: FarmListProps) {
-  return (
-    <div className="container mx-auto p-4 max-w-4xl">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">My Farms</h1>
-        <Button asChild>
-          <Link href="/farm/new">Create Farm</Link>
-        </Button>
-      </div>
+export function FarmList({ farms: initialFarms }: FarmListProps) {
+  const [farms, setFarms] = useState(initialFarms);
 
+  const handleDelete = (farmId: number) => {
+    setFarms(farms.filter((farm) => farm.id !== farmId));
+  };
+  return (
+    <>
       {farms.length === 0 ? (
         <Card>
           <CardHeader>
@@ -36,10 +37,10 @@ export function FarmList({ farms }: FarmListProps) {
       ) : (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {farms.map((farm) => (
-            <FarmItem key={farm.id} farm={farm} />
+            <FarmItem key={farm.id} farm={farm} onDelete={handleDelete} />
           ))}
         </div>
       )}
-    </div>
+    </>
   );
 }

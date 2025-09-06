@@ -24,24 +24,42 @@ export const createFarm = async (
   name: string,
   userId: string,
 ): Promise<Farm> => {
-  // Create the farm
-  const [newFarm] = await db
-    .insert(farm)
-    .values({
-      name,
-    })
-    .returning();
+  return await db.transaction(async (tx) => {
+    // Create the farm
+    const [newFarm] = await tx
+      .insert(farm)
+      .values({
+        name,
+      })
+      .returning();
 
-  // Add the user as a farmer to the farm
-  await db.insert(farmUser).values({
-    userId,
-    farmId: newFarm.id,
-    role: 'farmer',
+    // Add the user as a farmer to the farm
+    await tx.insert(farmUser).values({
+      userId,
+      farmId: newFarm.id,
+      role: 'farmer',
+    });
+
+    return {
+      id: newFarm.id,
+      name: newFarm.name,
+      createdAt: newFarm.createdAt,
+    };
   });
+};
 
-  return {
-    id: newFarm.id,
-    name: newFarm.name,
-    createdAt: newFarm.createdAt,
-  };
+export const deleteFarm = async (farmId: number): Promise<void> => {
+  try {
+    await db.transaction(async (tx) => {
+      // First delete all farm-user relationships
+      await tx.delete(farmUser).where(eq(farmUser.farmId, farmId));
+      // Then delete the farm
+      await tx.delete(farm).where(eq(farm.id, farmId));
+    });
+  } catch (error) {
+    console.error(`Failed to delete farm ${farmId}:`, error);
+    throw new Error(
+      `Failed to delete farm: ${error instanceof Error ? error.message : 'Unknown error'}`,
+    );
+  }
 };
