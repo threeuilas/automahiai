@@ -29,7 +29,7 @@ export function FarmList({ farms }: FarmListProps) {
       ) : (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {farms.map((farm) => (
-            <FarmItem key={farm.id} farm={farm} />
+            <FarmItem key={farm.id} farm={farm} onDelete={onDelete} />
           ))}
         </div>
       )}

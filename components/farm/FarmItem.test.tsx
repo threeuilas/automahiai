@@ -29,7 +29,6 @@ describe('FarmItem', () => {
   };
 
   const mockHandleDelete = jest.fn();
-  const mockOnDelete = jest.fn();
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -43,7 +42,7 @@ describe('FarmItem', () => {
   });
 
   it('renders farm information and delete button correctly', () => {
-    render(<FarmItem farm={mockFarm} onDelete={mockOnDelete} />);
+    render(<FarmItem farm={mockFarm} />);
 
     // Check farm name
     expect(screen.getByText('Test Farm')).toBeInTheDocument();
@@ -60,7 +59,7 @@ describe('FarmItem', () => {
   });
 
   it('calls handleDelete when delete button is clicked', () => {
-    render(<FarmItem farm={mockFarm} onDelete={mockOnDelete} />);
+    render(<FarmItem farm={mockFarm} />);
     const deleteButton = screen.getByRole('button');
 
     fireEvent.click(deleteButton);
@@ -73,17 +72,15 @@ describe('FarmItem', () => {
       handleDelete: mockHandleDelete,
     });
 
-    render(<FarmItem farm={mockFarm} onDelete={mockOnDelete} />);
+    render(<FarmItem farm={mockFarm} />);
     const deleteButton = screen.getByRole('button');
     expect(deleteButton).toBeDisabled();
   });
 
   it('passes correct props to useDeleteFarm hook', () => {
-    // Test with onDelete callback
-    render(<FarmItem farm={mockFarm} onDelete={mockOnDelete} />);
+    render(<FarmItem farm={mockFarm} />);
     expect(mockUseDeleteFarm).toHaveBeenCalledWith({
       farmId: mockFarm.id,
-      onDelete: mockOnDelete,
     });
   });
 });
