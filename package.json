@@ -15,7 +15,8 @@
     "migrate": "pnpm exec drizzle-kit migrate",
     "start": "next start",
     "test": "jest",
-    "ci": "pnpm run lint && pnpm run test"
+    "tsc": "tsc --noEmit",
+    "ci": "pnpm run lint && pnpm run tsc && pnpm run test"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.1",
