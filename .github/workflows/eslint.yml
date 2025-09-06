@@ -1,4 +1,4 @@
-name: Run ESLint
+name: Run ESLint and tests
 
 on:
   # Runs on pushes targeting the default branch
@@ -19,5 +19,5 @@ jobs:
         uses: pnpm/action-setup@v4.1.0
       - name: Install packages
         run: pnpm install
-      - name: Run ESLint
-        run: pnpm lint
+      - name: Run CI
+        run: pnpm run ci
