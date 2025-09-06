@@ -1,3 +1,8 @@
+import {
+  CreateFarmResponse,
+  DeleteFarmResponse,
+  deleteFarmSchema,
+} from '@/lib/api/farm/schema';
 import { auth } from '@/lib/auth/server';
 import { createFarm, deleteFarm } from '@/lib/db/data/farms';
 import { NextResponse } from 'next/server';
@@ -10,8 +15,8 @@ export async function POST(request: Request) {
     });
 
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { error: 'Authentication required' },
+      return NextResponse.json<CreateFarmResponse>(
+        { success: false, error: 'Authentication required' },
         { status: 401 },
       );
     }
@@ -41,8 +46,8 @@ export async function POST(request: Request) {
     return NextResponse.json(farm, { status: 201 });
   } catch (error) {
     console.error('Error creating farm:', error);
-    return NextResponse.json(
-      { error: 'Failed to create farm' },
+    return NextResponse.json<CreateFarmResponse>(
+      { success: false, error: 'Failed to create farm' },
       { status: 500 },
     );
   }
@@ -56,32 +61,35 @@ export async function DELETE(request: Request) {
     });
 
     if (!session?.user?.id) {
-      return NextResponse.json(
-        { error: 'Authentication required' },
+      return NextResponse.json<DeleteFarmResponse>(
+        { success: false, error: 'Authentication required' },
         { status: 401 },
       );
     }
 
     // Parse the request body
     const body = await request.json();
-    const { farmId } = body;
-
-    // Validate the input
-    if (!farmId || typeof farmId !== 'number') {
-      return NextResponse.json(
-        { error: 'Farm ID is required' },
+    let id;
+    try {
+      id = deleteFarmSchema.parse(body).id;
+    } catch {
+      return NextResponse.json<DeleteFarmResponse>(
+        { success: false, error: 'Invalid request body' },
         { status: 400 },
       );
     }
 
     // Delete the farm
-    await deleteFarm(farmId);
+    await deleteFarm(id);
 
-    return NextResponse.json({ success: true }, { status: 200 });
+    return NextResponse.json<DeleteFarmResponse>(
+      { success: true },
+      { status: 200 },
+    );
   } catch (error) {
     console.error('Error deleting farm:', error);
-    return NextResponse.json(
-      { error: 'Failed to delete farm' },
+    return NextResponse.json<DeleteFarmResponse>(
+      { success: false, error: 'Failed to delete farm' },
       { status: 500 },
     );
   }

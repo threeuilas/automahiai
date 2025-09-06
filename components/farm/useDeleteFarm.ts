@@ -5,10 +5,9 @@ import { useState } from 'react';
 
 interface UseDeleteFarmProps {
   farmId: number;
-  onDelete: (farmId: number) => void;
 }
 
-export function useDeleteFarm({ farmId, onDelete }: UseDeleteFarmProps) {
+export function useDeleteFarm({ farmId }: UseDeleteFarmProps) {
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
 
@@ -20,15 +19,13 @@ export function useDeleteFarm({ farmId, onDelete }: UseDeleteFarmProps) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ farmId }),
+        body: JSON.stringify({ id: farmId }),
       });
 
       if (!response.ok) {
         throw new Error('Failed to delete farm');
       }
 
-      // Call the onDelete callback to refresh the farm list
-      onDelete(farmId);
       router.refresh();
     } catch (error) {
       console.error('Error deleting farm:', error);
