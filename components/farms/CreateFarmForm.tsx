@@ -30,7 +30,7 @@ interface CreateFarmFormProps {
   redirect?: string;
 }
 
-export function CreateFarmForm({ redirect = '/farm' }: CreateFarmFormProps) {
+export function CreateFarmForm({ redirect = '/farms' }: CreateFarmFormProps) {
   const { form, loading, error, createFarmHandler } = useCreateFarm();
 
   return (

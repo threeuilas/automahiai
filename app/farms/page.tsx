@@ -1,4 +1,4 @@
-import { FarmList } from '@/components/farm/FarmList';
+import { FarmList } from '@/components/farms/FarmList';
 import { auth } from '@/lib/auth/server';
 import { listUserFarms } from '@/lib/db/data/farms';
 import { headers } from 'next/headers';
@@ -14,7 +14,7 @@ export default async function Farm() {
   console.log(session);
 
   if (!session?.user) {
-    redirect(`/login?${REDIRECT_PARAM}=${encodeURIComponent('/farm')}`);
+    redirect(`/login?${REDIRECT_PARAM}=${encodeURIComponent('/farms')}`);
   }
   const farms = await listUserFarms(session.user.id);
 
@@ -23,7 +23,7 @@ export default async function Farm() {
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">My Farms</h1>
         <Button asChild>
-          <Link href="/farm/new">Create Farm</Link>
+          <Link href="/farms/new">Create Farm</Link>
         </Button>
       </div>
       <FarmList farms={farms} />

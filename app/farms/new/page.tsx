@@ -1,4 +1,4 @@
-import { CreateFarmForm } from '@/components/farm/CreateFarmForm';
+import { CreateFarmForm } from '@/components/farms/CreateFarmForm';
 import { auth } from '@/lib/auth/server';
 import { headers } from 'next/headers';
 
@@ -22,7 +22,7 @@ export default async function CreateFarm() {
 
   return (
     <div className="flex min-h-screen items-center justify-center p-4 bg-background">
-      <CreateFarmForm redirect="/farm" />
+      <CreateFarmForm redirect="/farms" />
     </div>
   );
 }

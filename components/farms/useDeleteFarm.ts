@@ -14,7 +14,7 @@ export function useDeleteFarm({ farmId }: UseDeleteFarmProps) {
   const handleDelete = async () => {
     setIsDeleting(true);
     try {
-      const response = await fetch('/api/farm', {
+      const response = await fetch('/api/farms', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

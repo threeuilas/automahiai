@@ -19,7 +19,7 @@ describe('SignoutButton', () => {
   const signout = jest.fn();
   beforeEach(() => {
     jest.clearAllMocks();
-    mockUsePathname.mockReturnValue('/farm');
+    mockUsePathname.mockReturnValue('/farms');
     mockUseSignout.mockReturnValue({ signout, loading: false });
   });
 
@@ -49,6 +49,6 @@ describe('SignoutButton', () => {
 
   it('uses the correct redirect when signing out', () => {
     render(<SignoutButton text="Sign Out" />);
-    expect(mockUseSignout).toHaveBeenCalledWith('/farm');
+    expect(mockUseSignout).toHaveBeenCalledWith('/farms');
   });
 });

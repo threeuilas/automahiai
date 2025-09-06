@@ -48,7 +48,7 @@ describe('LoginButton', () => {
   });
 
   it('renders Link with current path if not /signup or /login', () => {
-    mockUsePathname.mockReturnValue('/farm');
+    mockUsePathname.mockReturnValue('/farms');
     render(<LoginButton text="Login" />);
     const link = screen.getByRole('link', { name: 'Login' });
     expect(link).toHaveAttribute('href', `/login?${REDIRECT_PARAM}=%2Ffarm`);
@@ -63,7 +63,7 @@ describe('LoginButton', () => {
   });
 
   it('renders with custom text', () => {
-    mockUsePathname.mockReturnValue('/farm');
+    mockUsePathname.mockReturnValue('/farms');
     render(<LoginButton text="Sign In" />);
     expect(screen.getByText('Sign In')).toBeInTheDocument();
   });
