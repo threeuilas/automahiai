@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { SubmitErrorHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
@@ -27,31 +27,26 @@ export function useFarmForm() {
     setLoading(true);
     setError(undefined);
 
-    await fetch('/api/farm', {
-      method: 'POST',
-      body: JSON.stringify({ name: form.getValues('name') }),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error('Failed to create farm');
-        }
-        router.push('/farm');
-        router.refresh();
-      })
-      .catch((err) => {
-        setError(err.message);
-      })
-      .finally(() => {
-        setLoading(false);
+    try {
+      const res = await fetch('/api/farm', {
+        method: 'POST',
+        body: JSON.stringify({ name: form.getValues('name') }),
       });
+
+      if (!res.ok) {
+        throw new Error('Failed to create farm');
+      }
+
+      router.push('/farm');
+      router.refresh();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'An error occurred');
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const onInvalid: SubmitErrorHandler<FarmFormValues> = (errors) => {
-    setError(errors.name?.message);
-    setLoading(false);
-  };
-
-  const createFarmHandler = form.handleSubmit(onValid, onInvalid);
+  const createFarmHandler = form.handleSubmit(onValid);
 
   return { loading, error, createFarmHandler, form };
 }

@@ -1,5 +1,5 @@
 import { auth } from '@/lib/auth/server';
-import { createFarm } from '@/lib/db/data/farms';
+import { createFarm, deleteFarm } from '@/lib/db/data/farms';
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
@@ -43,6 +43,45 @@ export async function POST(request: Request) {
     console.error('Error creating farm:', error);
     return NextResponse.json(
       { error: 'Failed to create farm' },
+      { status: 500 },
+    );
+  }
+}
+
+export async function DELETE(request: Request) {
+  try {
+    // Get the session
+    const session = await auth.api.getSession({
+      headers: request.headers,
+    });
+
+    if (!session?.user?.id) {
+      return NextResponse.json(
+        { error: 'Authentication required' },
+        { status: 401 },
+      );
+    }
+
+    // Parse the request body
+    const body = await request.json();
+    const { farmId } = body;
+
+    // Validate the input
+    if (!farmId || typeof farmId !== 'number') {
+      return NextResponse.json(
+        { error: 'Farm ID is required' },
+        { status: 400 },
+      );
+    }
+
+    // Delete the farm
+    await deleteFarm(farmId);
+
+    return NextResponse.json({ success: true }, { status: 200 });
+  } catch (error) {
+    console.error('Error deleting farm:', error);
+    return NextResponse.json(
+      { error: 'Failed to delete farm' },
       { status: 500 },
     );
   }
