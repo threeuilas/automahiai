@@ -14,7 +14,7 @@ const farmSchema = z.object({
 
 type FarmFormValues = z.infer<typeof farmSchema>;
 
-export function useFarmForm(userId: string) {
+export function useFarmForm() {
   const router = useRouter();
   const form = useForm<FarmFormValues>({
     defaultValues: { name: '' },
@@ -28,7 +28,7 @@ export function useFarmForm(userId: string) {
     setLoading(true);
     setError(undefined);
 
-    fetch('/api/farm', {
+    await fetch('/api/farm', {
       method: 'POST',
       body: JSON.stringify({ name: form.getValues('name') }),
     })

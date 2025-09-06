@@ -27,14 +27,10 @@ export interface CreateFarmFormValues {
 
 interface CreateFarmFormProps {
   redirect?: string;
-  userId: string;
 }
 
-export function CreateFarmForm({
-  redirect = '/farm',
-  userId,
-}: CreateFarmFormProps) {
-  const { form, loading, error, createFarmHandler } = useFarmForm(userId);
+export function CreateFarmForm({ redirect = '/farm' }: CreateFarmFormProps) {
+  const { form, loading, error, createFarmHandler } = useFarmForm();
   const router = useRouter();
 
   return (

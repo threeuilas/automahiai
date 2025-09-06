@@ -2,6 +2,7 @@ import { Farm } from '@/lib/db/data/types';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
+import { FarmItem } from './FarmItem';
 
 interface FarmListProps {
   farms: Farm[];
@@ -35,16 +36,7 @@ export function FarmList({ farms }: FarmListProps) {
       ) : (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {farms.map((farm) => (
-            <Card key={farm.id} className="hover:shadow-md transition-shadow">
-              <CardHeader>
-                <CardTitle className="text-lg">{farm.name}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">
-                  Created: {new Date(farm.createdAt).toLocaleDateString()}
-                </p>
-              </CardContent>
-            </Card>
+            <FarmItem key={farm.id} farm={farm} />
           ))}
         </div>
       )}
