@@ -4,7 +4,8 @@ import { listUserFarms } from '@/lib/db/data/farms';
 import { headers } from 'next/headers';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { LoginForm } from '@/components/auth/elements/LoginForm';
+import { redirect } from 'next/navigation';
+import { REDIRECT_PARAM } from '@/components/auth/constants';
 
 export default async function Farm() {
   const session = await auth.api.getSession({
@@ -13,7 +14,7 @@ export default async function Farm() {
   console.log(session);
 
   if (!session?.user) {
-    return <LoginForm redirect="/farm" />;
+    redirect(`/login?${REDIRECT_PARAM}=${encodeURIComponent('/farm')}`);
   }
   const farms = await listUserFarms(session.user.id);
 

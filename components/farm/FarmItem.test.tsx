@@ -21,6 +21,7 @@ describe('FarmItem', () => {
   const mockFarm = {
     id: 1,
     name: 'Test Farm',
+    description: 'A test farm',
     createdAt: new Date('2024-01-15T10:30:00Z'),
   };
 
