@@ -1,23 +1,18 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { useRouter, usePathname, useSearchParams } from 'next/navigation';
+import { render, screen } from '@testing-library/react';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { LoginButton } from './LoginButton';
 import '@testing-library/jest-dom';
 import { REDIRECT_PARAM } from '../constants';
 
 jest.mock('next/navigation', () => ({
-  useRouter: jest.fn(),
   usePathname: jest.fn(),
   useSearchParams: jest.fn(),
 }));
 
-const mockUseRouter = jest.mocked(useRouter);
 const mockUsePathname = jest.mocked(usePathname);
 const mockUseSearchParams = jest.mocked(useSearchParams);
 
 describe('LoginButton', () => {
-  const mockRouter = {
-    push: jest.fn(),
-  };
   const setupUseSearchParams = (target: string | null) => {
     mockUseSearchParams.mockReturnValue({
       get: jest.fn((key) => {
@@ -32,44 +27,39 @@ describe('LoginButton', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     setupUseSearchParams('/target-path');
-    mockUseRouter.mockReturnValue(
-      mockRouter as unknown as ReturnType<typeof useRouter>,
-    );
   });
 
-  it('redirects to /login with correct param from /signup', () => {
+  it('renders Link with correct href from /signup', () => {
     mockUsePathname.mockReturnValue('/signup');
     render(<LoginButton text="Login" />);
-    fireEvent.click(screen.getByText('Login'));
-    expect(mockRouter.push).toHaveBeenCalledWith(
+    const link = screen.getByRole('link', { name: 'Login' });
+    expect(link).toHaveAttribute(
+      'href',
       `/login?${REDIRECT_PARAM}=%2Ftarget-path`,
     );
   });
 
-  it('redirects to /login with redirect to / from /signup when there is no param', () => {
+  it('renders Link with redirect to / from /signup when there is no param', () => {
     mockUsePathname.mockReturnValue('/signup');
     setupUseSearchParams(null);
     render(<LoginButton text="Login" />);
-    fireEvent.click(screen.getByText('Login'));
-    expect(mockRouter.push).toHaveBeenCalledWith(
-      `/login?${REDIRECT_PARAM}=%2F`,
-    );
+    const link = screen.getByRole('link', { name: 'Login' });
+    expect(link).toHaveAttribute('href', `/login?${REDIRECT_PARAM}=%2F`);
   });
 
-  it('redirects to /login with current path if not /signup or /login', () => {
+  it('renders Link with current path if not /signup or /login', () => {
     mockUsePathname.mockReturnValue('/farm');
     render(<LoginButton text="Login" />);
-    fireEvent.click(screen.getByText('Login'));
-    expect(mockRouter.push).toHaveBeenCalledWith(
-      `/login?${REDIRECT_PARAM}=%2Ffarm`,
-    );
+    const link = screen.getByRole('link', { name: 'Login' });
+    expect(link).toHaveAttribute('href', `/login?${REDIRECT_PARAM}=%2Ffarm`);
   });
 
-  it('does nothing if already at /login', () => {
+  it('renders Link with redirect to / from /login', () => {
     mockUsePathname.mockReturnValue('/login');
+    setupUseSearchParams(null);
     render(<LoginButton text="Login" />);
-    fireEvent.click(screen.getByText('Login'));
-    expect(mockRouter.push).not.toHaveBeenCalled();
+    const link = screen.getByRole('link', { name: 'Login' });
+    expect(link).toHaveAttribute('href', `/login?${REDIRECT_PARAM}=%2F`);
   });
 
   it('renders with custom text', () => {

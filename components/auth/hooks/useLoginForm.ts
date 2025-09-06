@@ -26,6 +26,7 @@ export function useLoginForm(destination: string = '/') {
     const result = await signIn.email({
       email: form.getValues('email'),
       password: form.getValues('password'),
+      rememberMe: form.getValues('remember'),
     });
     if (result.error) {
       setError(result.error?.message);
