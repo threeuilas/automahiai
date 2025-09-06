@@ -22,7 +22,7 @@ export default async function CreateFarm() {
 
   return (
     <div className="flex min-h-screen items-center justify-center p-4 bg-background">
-      <CreateFarmForm redirect="/farm" userId={session.user.id} />
+      <CreateFarmForm redirect="/farm" />
     </div>
   );
 }

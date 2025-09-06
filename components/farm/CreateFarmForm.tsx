@@ -19,7 +19,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { useRouter } from 'next/navigation';
-import { useFarmForm } from './useFarmForm';
+import { useCreateFarm } from './useFarmForm';
 
 export interface CreateFarmFormValues {
   name: string;
@@ -30,7 +30,7 @@ interface CreateFarmFormProps {
 }
 
 export function CreateFarmForm({ redirect = '/farm' }: CreateFarmFormProps) {
-  const { form, loading, error, createFarmHandler } = useFarmForm();
+  const { form, loading, error, createFarmHandler } = useCreateFarm();
   const router = useRouter();
 
   return (
