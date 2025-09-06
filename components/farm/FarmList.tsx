@@ -1,22 +1,14 @@
-'use client';
-
 import { Farm } from '@/lib/db/data/types';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
 import { FarmItem } from './FarmItem';
-import { useState } from 'react';
 
 interface FarmListProps {
   farms: Farm[];
 }
 
-export function FarmList({ farms: initialFarms }: FarmListProps) {
-  const [farms, setFarms] = useState(initialFarms);
-
-  const handleDelete = (farmId: number) => {
-    setFarms(farms.filter((farm) => farm.id !== farmId));
-  };
+export function FarmList({ farms }: FarmListProps) {
   return (
     <>
       {farms.length === 0 ? (
@@ -37,7 +29,7 @@ export function FarmList({ farms: initialFarms }: FarmListProps) {
       ) : (
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {farms.map((farm) => (
-            <FarmItem key={farm.id} farm={farm} onDelete={handleDelete} />
+            <FarmItem key={farm.id} farm={farm} />
           ))}
         </div>
       )}
