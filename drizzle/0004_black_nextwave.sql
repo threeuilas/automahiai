@@ -1,0 +1,1 @@
+ALTER TABLE "crop" ADD COLUMN "attributes" jsonb NOT NULL;

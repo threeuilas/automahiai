@@ -8,6 +8,34 @@
       "when": 1756617743443,
       "tag": "0000_glossy_green_goblin",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1757151199775,
+      "tag": "0001_fresh_chronomancer",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1757151778282,
+      "tag": "0002_dashing_ultimatum",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1757152410152,
+      "tag": "0003_wild_lady_ursula",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1757152737101,
+      "tag": "0004_black_nextwave",
+      "breakpoints": true
     }
   ]
 }

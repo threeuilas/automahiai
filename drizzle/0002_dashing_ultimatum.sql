@@ -1,0 +1,1 @@
+ALTER TABLE "crop" ADD COLUMN "quantity_per_harvest" integer NOT NULL;

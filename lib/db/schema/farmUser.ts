@@ -37,11 +37,6 @@ export const userRelations = relations(user, ({ many }) => ({
   farmUser: many(farmUser),
 }));
 
-// Drizzle relations for farms
-export const farmRelations = relations(farm, ({ many }) => ({
-  farmUser: many(farmUser),
-}));
-
 // Drizzle relations for farm users
 export const farmUsersRelations = relations(farmUser, ({ one }) => ({
   user: one(user, {
