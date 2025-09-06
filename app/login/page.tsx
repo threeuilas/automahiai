@@ -1,4 +1,4 @@
-import AuthPage from '@/components/auth/elements/AuthPage';
+import { AuthPage } from '@/components/auth/elements/AuthPage';
 import { REDIRECT_PARAM } from '@/components/auth/constants';
 
 interface LoginPageProps {

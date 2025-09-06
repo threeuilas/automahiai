@@ -9,7 +9,7 @@ interface AuthPageProps {
   redirect: string;
 }
 
-export default async function AuthPage({ type, redirect }: AuthPageProps) {
+export async function AuthPage({ type, redirect }: AuthPageProps) {
   const heads = await headers();
   const session = await auth.api.getSession({ headers: heads });
 
