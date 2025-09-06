@@ -7,7 +7,7 @@ export default function CropIndex() {
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">My Crops</h1>
         <Button asChild>
-          <Link href="/crop/new">Create Crop</Link>
+          <Link href="/crops/new">Create Crop</Link>
         </Button>
       </div>
     </div>

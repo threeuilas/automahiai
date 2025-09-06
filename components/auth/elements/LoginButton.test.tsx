@@ -51,7 +51,7 @@ describe('LoginButton', () => {
     mockUsePathname.mockReturnValue('/farms');
     render(<LoginButton text="Login" />);
     const link = screen.getByRole('link', { name: 'Login' });
-    expect(link).toHaveAttribute('href', `/login?${REDIRECT_PARAM}=%2Ffarm`);
+    expect(link).toHaveAttribute('href', `/login?${REDIRECT_PARAM}=%2Ffarms`);
   });
 
   it('renders Link with redirect to / from /login', () => {
