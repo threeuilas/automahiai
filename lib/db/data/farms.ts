@@ -23,14 +23,11 @@ export const listUserFarms = async (userId: string): Promise<Farm[]> => {
 
 export const createFarm = async (
   userId: string,
-  { name, description }: typeof farm.$inferInsert,
+  farmInsert: typeof farm.$inferInsert,
 ): Promise<Farm> => {
   return await db.transaction(async (tx) => {
     // Create the farm
-    const [newFarm] = await tx
-      .insert(farm)
-      .values({ name, description })
-      .returning();
+    const [newFarm] = await tx.insert(farm).values(farmInsert).returning();
 
     // Add the user as a farmer to the farm
     await tx.insert(farmUser).values({

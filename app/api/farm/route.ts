@@ -32,10 +32,9 @@ export async function POST(request: Request) {
         { status: 400 },
       );
     }
-    const { name, description } = result.data;
 
     // Create the farm
-    const farm = await createFarm(session.user.id, { name, description });
+    const farm = await createFarm(session.user.id, result.data);
 
     return NextResponse.json(farm, { status: 201 });
   } catch (error) {

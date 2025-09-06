@@ -6,7 +6,7 @@ export const createFarmSchema = z.object({
     .string()
     .min(1, 'Farm name is required')
     .max(100, 'Farm name must be less than 100 characters'),
-  description: z.string().optional(),
+  description: z.string().default(''),
 }) satisfies z.ZodType<typeof farm.$inferInsert>;
 
 export type CreateFarmRequest = z.infer<typeof createFarmSchema>;

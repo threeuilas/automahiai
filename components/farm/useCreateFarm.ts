@@ -6,7 +6,7 @@ import { CreateFarmRequest, createFarmSchema } from '@/lib/api/farm/schema';
 
 export function useCreateFarm() {
   const router = useRouter();
-  const form = useForm<CreateFarmRequest>({
+  const form = useForm({
     defaultValues: { name: '', description: '' },
     resolver: zodResolver(createFarmSchema),
   });
