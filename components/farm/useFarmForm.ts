@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { SubmitErrorHandler, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { createFarm } from '@/lib/db/data/farms';
 
 const farmSchema = z.object({
   name: z

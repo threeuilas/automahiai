@@ -1,4 +1,4 @@
-import { auth } from '@/lib/auth-server';
+import { auth } from '@/lib/auth/server';
 import { createFarm } from '@/lib/db/data/farms';
 import { NextResponse } from 'next/server';
 

@@ -1,5 +1,5 @@
 import { CreateFarmForm } from '@/components/farm/CreateFarmForm';
-import { auth } from '@/lib/auth-server';
+import { auth } from '@/lib/auth/server';
 import { headers } from 'next/headers';
 
 export default async function CreateFarm() {
