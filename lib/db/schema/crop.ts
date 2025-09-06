@@ -1,4 +1,4 @@
-import { integer, pgTable, pgEnum, text, real } from 'drizzle-orm/pg-core';
+import { integer, pgTable, pgEnum, text } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 import { timestamps } from './helpers';
 import { farm } from './farm';
