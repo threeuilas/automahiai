@@ -15,6 +15,13 @@
       "when": 1757151199775,
       "tag": "0001_fresh_chronomancer",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1757151778282,
+      "tag": "0002_dashing_ultimatum",
+      "breakpoints": true
     }
   ]
 }

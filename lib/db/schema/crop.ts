@@ -14,6 +14,7 @@ export const crop = pgTable('crop', {
   name: text('name').notNull(),
   type: cropHarvestTypeEnum('type').notNull(),
   daysToMaturity: integer('days_to_maturity').notNull(),
+  quantityPerHarvest: integer('quantity_per_harvest').notNull(),
   daysBetweenHarvests: integer('days_between_harvests'), // Only for continuous harvest
   seedsPerLinearFeet: integer('seeds_per_linear_feet').notNull(),
   plantsPerLinearFeet: integer('plants_per_linear_feet').notNull(),
