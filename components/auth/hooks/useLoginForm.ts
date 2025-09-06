@@ -1,23 +1,17 @@
-import { signIn } from '@/lib/auth-client';
+import { signIn } from '@/lib/auth/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { SubmitErrorHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-
-const loginSchema = z.object({
-  email: z.email(),
-  password: z.string().min(6).max(100),
-  remember: z.boolean().optional(),
-});
-
-type LoginFormValues = z.infer<typeof loginSchema>;
+import { LoginFormValues, LoginSchema } from '@/lib/auth/schema';
 
 export function useLoginForm(destination: string = '/') {
   const router = useRouter();
   const form = useForm<LoginFormValues>({
     defaultValues: { email: '', password: '', remember: false },
-    resolver: zodResolver(loginSchema),
+    mode: 'onSubmit',
+    reValidateMode: 'onChange',
+    resolver: zodResolver(LoginSchema),
   });
 
   const [loading, setLoading] = useState(false);
@@ -40,12 +34,7 @@ export function useLoginForm(destination: string = '/') {
     setLoading(false);
   };
 
-  const onInvalid: SubmitErrorHandler<LoginFormValues> = (errors) => {
-    setError(errors.email?.message || errors.password?.message);
-    setLoading(false);
-  };
-
-  const login = form.handleSubmit(onValid, onInvalid);
+  const login = form.handleSubmit(onValid);
 
   return { loading, error, login, form };
 }

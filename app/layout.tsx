@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import React from 'react';
-import { auth } from '@/lib/auth-server';
+import { auth } from '@/lib/auth/server';
 import { headers } from 'next/headers';
 import { SignoutButton } from '../components/auth/elements/SignoutButton';
 import { LoginButton } from '@/components/auth/elements/LoginButton';

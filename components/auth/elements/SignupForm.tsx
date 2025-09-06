@@ -27,14 +27,12 @@ interface SignupFormProps {
 }
 
 export function SignupForm({ redirect }: SignupFormProps) {
-  const { form, loading, error, signup, fieldErrors } = useSignupForm(redirect);
+  const { form, loading, error, signup } = useSignupForm(redirect);
   const router = useRouter();
 
   const loginUrl = `/login?${REDIRECT_PARAM}=${encodeURIComponent(redirect)}`;
-  console.log('DEBOOG HERE');
   return (
     <>
-      <div>DEBUG DFLKSJDFLJ</div>
       <Card className="max-w-sm w-full mx-auto">
         <CardHeader>
           <CardTitle>Sign Up</CardTitle>
@@ -52,7 +50,7 @@ export function SignupForm({ redirect }: SignupFormProps) {
                     <FormControl>
                       <Input type="text" autoComplete="name" {...field} />
                     </FormControl>
-                    <FormMessage>{fieldErrors.name}</FormMessage>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -65,7 +63,7 @@ export function SignupForm({ redirect }: SignupFormProps) {
                     <FormControl>
                       <Input type="email" autoComplete="email" {...field} />
                     </FormControl>
-                    <FormMessage>{fieldErrors.email}</FormMessage>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -82,7 +80,7 @@ export function SignupForm({ redirect }: SignupFormProps) {
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage>{fieldErrors.password}</FormMessage>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -99,7 +97,7 @@ export function SignupForm({ redirect }: SignupFormProps) {
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage>{fieldErrors.confirmPassword}</FormMessage>
+                    <FormMessage />
                   </FormItem>
                 )}
               />
@@ -119,7 +117,7 @@ export function SignupForm({ redirect }: SignupFormProps) {
                         I agree to the terms
                       </FormLabel>
                     </div>
-                    <FormMessage>{fieldErrors.agreeToTerms}</FormMessage>
+                    <FormMessage />
                   </FormItem>
                 )}
               />

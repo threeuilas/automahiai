@@ -23,12 +23,6 @@ import { useRouter } from 'next/navigation';
 import { useLoginForm } from '../hooks/useLoginForm';
 import { REDIRECT_PARAM } from '../constants';
 
-export interface LoginFormValues {
-  email: string;
-  password: string;
-  remember: boolean;
-}
-
 interface LoginFormProps {
   redirect: string;
 }

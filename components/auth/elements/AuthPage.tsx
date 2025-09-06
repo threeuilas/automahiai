@@ -1,4 +1,4 @@
-import { auth } from '@/lib/auth-server';
+import { auth } from '@/lib/auth/server';
 import { LoginForm } from './LoginForm';
 import { SignoutButton } from '@/components/auth/elements/SignoutButton';
 import { headers } from 'next/headers';

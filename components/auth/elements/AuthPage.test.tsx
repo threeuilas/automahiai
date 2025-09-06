@@ -1,10 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import AuthPage from '@/components/auth/elements/AuthPage';
 import '@testing-library/jest-dom';
-import { auth } from '@/lib/auth-server';
+import { auth } from '@/lib/auth/server';
 import { headers } from 'next/headers';
 
-jest.mock('@/lib/auth-server', () => ({
+jest.mock('@/lib/auth/server', () => ({
   auth: {
     api: {
       getSession: jest.fn(),
