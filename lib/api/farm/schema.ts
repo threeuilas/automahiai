@@ -1,11 +1,13 @@
 import { z } from 'zod';
+import { farm } from '@/lib/db/schema/farm';
 
 export const createFarmSchema = z.object({
   name: z
     .string()
     .min(1, 'Farm name is required')
     .max(100, 'Farm name must be less than 100 characters'),
-});
+  description: z.string().optional(),
+}) satisfies z.ZodType<typeof farm.$inferInsert>;
 
 export type CreateFarmRequest = z.infer<typeof createFarmSchema>;
 export type CreateFarmResponse = CreateFarmSuccess | CreateFarmFailure;

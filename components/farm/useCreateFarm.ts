@@ -2,28 +2,19 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-
-const farmSchema = z.object({
-  name: z
-    .string()
-    .min(1, 'Farm name is required')
-    .max(100, 'Farm name must be less than 100 characters'),
-});
-
-type FarmFormValues = z.infer<typeof farmSchema>;
+import { CreateFarmRequest, createFarmSchema } from '@/lib/api/farm/schema';
 
 export function useCreateFarm() {
   const router = useRouter();
-  const form = useForm<FarmFormValues>({
+  const form = useForm<CreateFarmRequest>({
     defaultValues: { name: '' },
-    resolver: zodResolver(farmSchema),
+    resolver: zodResolver(createFarmSchema),
   });
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | undefined>(undefined);
 
-  const onValid = async (formValues: FarmFormValues) => {
+  const onValid = async (formValues: CreateFarmRequest) => {
     setLoading(true);
     setError(undefined);
 

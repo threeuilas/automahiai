@@ -1,5 +1,3 @@
-export interface Farm {
-  id: number;
-  name: string;
-  createdAt: Date;
-}
+import { farm } from '../schema/farm';
+
+export type Farm = Omit<typeof farm.$inferSelect, 'updatedAt' | 'deletedAt'>;

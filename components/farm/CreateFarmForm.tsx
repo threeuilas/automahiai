@@ -19,7 +19,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { useRouter } from 'next/navigation';
-import { useCreateFarm } from './useFarmForm';
+import { useCreateFarm } from './useCreateFarm';
 
 export interface CreateFarmFormValues {
   name: string;
