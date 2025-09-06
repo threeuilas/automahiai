@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import React from 'react';
+import Link from 'next/link';
 import { auth } from '@/lib/auth/server';
 import { headers } from 'next/headers';
 import { SignoutButton } from '../components/auth/elements/SignoutButton';
@@ -33,7 +34,12 @@ export default async function RootLayout({
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <div className="flex items-center">
-                <h1 className="text-2xl font-bold text-white">Automahiʻai</h1>
+                <Link
+                  href="/"
+                  className="text-2xl font-bold text-white hover:text-green-200 transition-colors"
+                >
+                  Automahiʻai
+                </Link>
               </div>
 
               <div className="flex items-center gap-4">
