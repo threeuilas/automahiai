@@ -8,7 +8,7 @@ import { useDeleteFarm } from './useDeleteFarm';
 
 interface FarmItemProps {
   farm: Farm;
-  onDelete?: (farmId: number) => void;
+  onDelete: (farmId: number) => void;
 }
 
 export function FarmItem({ farm, onDelete }: FarmItemProps) {

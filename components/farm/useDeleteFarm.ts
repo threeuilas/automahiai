@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 interface UseDeleteFarmProps {
   farmId: number;
-  onDelete?: (farmId: number) => void;
+  onDelete: (farmId: number) => void;
 }
 
 export function useDeleteFarm({ farmId, onDelete }: UseDeleteFarmProps) {
@@ -28,7 +28,7 @@ export function useDeleteFarm({ farmId, onDelete }: UseDeleteFarmProps) {
       }
 
       // Call the onDelete callback to refresh the farm list
-      onDelete?.(farmId);
+      onDelete(farmId);
       router.refresh();
     } catch (error) {
       console.error('Error deleting farm:', error);
