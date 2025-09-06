@@ -2,17 +2,36 @@ import { integer, pgTable, pgEnum, text, jsonb } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 import { timestamps } from './helpers';
 import { farm } from './farm';
+import z from 'zod';
 
-// Enum for crop harvest types
-// export const cropHarvestTypeEnum = pgEnum('crop_harvest_type', [
-//   'harvest_once',
-//   'continuous_harvest',
-// ]);
+const baseCropAttributesSchema = z.object({
+  daysToMaturity: z.number(),
+  quantityPerHarvest: z.number(),
+  seedVendor: z.string(),
+  seedsPerLinearFeet: z.number(),
+  plantsPerLinearFeet: z.number(),
+});
+
+const continuousCropAttributesSchema = baseCropAttributesSchema.extend({
+  type: z.literal('continuous_harvest'),
+  daysBetweenHarvests: z.number(),
+});
+
+const harvestOnceCropAttributesSchema = baseCropAttributesSchema.extend({
+  type: z.literal('harvest_once'),
+});
+
+export const CropAttributeSchema = z.union([
+  continuousCropAttributesSchema,
+  harvestOnceCropAttributesSchema,
+]);
+
+export type CropAttributeSchemaType = z.infer<typeof CropAttributeSchema>;
 
 export const crop = pgTable('crop', {
   id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
   name: text('name').notNull(),
-  attributes: jsonb('attributes').notNull(),
+  attributes: jsonb('attributes').notNull().$type<CropAttributeSchemaType>(),
   ...timestamps,
 });
 
