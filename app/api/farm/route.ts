@@ -1,11 +1,13 @@
 import {
   CreateFarmResponse,
+  createFarmSchema,
   DeleteFarmResponse,
   deleteFarmSchema,
 } from '@/lib/api/farm/schema';
 import { auth } from '@/lib/auth/server';
 import { createFarm, deleteFarm } from '@/lib/db/data/farms';
 import { NextResponse } from 'next/server';
+import z from 'zod';
 
 export async function POST(request: Request) {
   try {
@@ -23,25 +25,16 @@ export async function POST(request: Request) {
 
     // Parse the request body
     const body = await request.json();
-    const { name } = body;
-
-    // Validate the input
-    if (!name || typeof name !== 'string' || name.trim().length === 0) {
-      return NextResponse.json(
-        { error: 'Farm name is required' },
-        { status: 400 },
-      );
-    }
-
-    if (name.length > 100) {
-      return NextResponse.json(
-        { error: 'Farm name must be less than 100 characters' },
+    const result = createFarmSchema.safeParse(body);
+    if (!result.success) {
+      return NextResponse.json<CreateFarmResponse>(
+        { success: false, error: z.prettifyError(result.error) },
         { status: 400 },
       );
     }
 
     // Create the farm
-    const farm = await createFarm(name.trim(), session.user.id);
+    const farm = await createFarm(session.user.id, result.data);
 
     return NextResponse.json(farm, { status: 201 });
   } catch (error) {
@@ -69,15 +62,14 @@ export async function DELETE(request: Request) {
 
     // Parse the request body
     const body = await request.json();
-    let id;
-    try {
-      id = deleteFarmSchema.parse(body).id;
-    } catch {
+    const result = deleteFarmSchema.safeParse(body);
+    if (!result.success) {
       return NextResponse.json<DeleteFarmResponse>(
-        { success: false, error: 'Invalid request body' },
+        { success: false, error: z.prettifyError(result.error) },
         { status: 400 },
       );
     }
+    const { id } = result.data;
 
     // Delete the farm
     await deleteFarm(id);

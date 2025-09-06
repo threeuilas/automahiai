@@ -1,9 +1,11 @@
 import { FarmList } from '@/components/farm/FarmList';
 import { auth } from '@/lib/auth/server';
-import { getUserFarms } from '@/lib/db/data/farms';
+import { listUserFarms } from '@/lib/db/data/farms';
 import { headers } from 'next/headers';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
+import { REDIRECT_PARAM } from '@/components/auth/constants';
 
 export default async function Farm() {
   const session = await auth.api.getSession({
@@ -12,9 +14,9 @@ export default async function Farm() {
   console.log(session);
 
   if (!session?.user) {
-    return <div>Unauthenticated...</div>;
+    redirect(`/login?${REDIRECT_PARAM}=${encodeURIComponent('/farm')}`);
   }
-  const farms = await getUserFarms(session.user.id);
+  const farms = await listUserFarms(session.user.id);
 
   return (
     <div className="container mx-auto p-4 max-w-4xl">

@@ -19,10 +19,11 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { useRouter } from 'next/navigation';
-import { useCreateFarm } from './useFarmForm';
+import { useCreateFarm } from './useCreateFarm';
 
 export interface CreateFarmFormValues {
   name: string;
+  description?: string;
 }
 
 interface CreateFarmFormProps {
@@ -47,12 +48,30 @@ export function CreateFarmForm({ redirect = '/farm' }: CreateFarmFormProps) {
               control={form.control}
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Farm Name</FormLabel>
+                  <FormLabel>Name</FormLabel>
                   <FormControl>
                     <Input
                       type="text"
                       placeholder="Enter your farm name"
                       autoComplete="organization"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              name="description"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Description</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="text"
+                      placeholder="Enter a description for your farm"
+                      autoComplete="off"
                       {...field}
                     />
                   </FormControl>
