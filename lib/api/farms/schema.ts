@@ -1,53 +1,39 @@
 import { z } from 'zod';
-import { farm } from '@/lib/db/schema/farm';
+import { Farm, farmSchema, insertFarmSchema } from '@/lib/db/data/farms';
+
+const baseSuccessSchema = z.object({
+  success: z.literal(true),
+});
+const baseFailureSchema = z.object({
+  success: z.literal(false),
+  error: z.string(),
+});
 
 // Create Farm Schemas and Types
-export const createFarmRequest = z.object({
-  name: z
-    .string()
-    .min(1, 'Farm name is required')
-    .max(100, 'Farm name must be less than 100 characters'),
-  description: z.string().default(''),
-}) satisfies z.ZodType<typeof farm.$inferInsert>;
+export const createFarmRequestSchema = insertFarmSchema;
 
-const createFarmSuccess = z.object({
-  success: z.literal(true),
-  id: z.number(),
-  name: z.string(),
-  createdAt: z.date(),
-});
+const createFarmSuccessSchema = z.object({
+  ...farmSchema.shape,
+  ...baseSuccessSchema.shape,
+}) satisfies z.ZodType<Farm>;
 
-const createFarmFailure = z.object({
-  success: z.literal(false),
-  error: z.string(),
-});
-
-export const createFarmResponse = z.union([
-  createFarmSuccess,
-  createFarmFailure,
+export const createFarmResponseSchema = z.union([
+  createFarmSuccessSchema,
+  baseFailureSchema,
 ]);
 
-export type CreateFarmRequest = z.infer<typeof createFarmRequest>;
-export type CreateFarmResponse = z.infer<typeof createFarmResponse>;
+export type CreateFarmRequest = z.infer<typeof createFarmRequestSchema>;
+export type CreateFarmResponse = z.infer<typeof createFarmResponseSchema>;
 
 // Delete Farm Schemas and Types
-export const deleteFarmRequest = z.object({
-  id: z.number(),
+export const deleteFarmRequestSchema = farmSchema.pick({
+  id: true,
 });
 
-const deleteFarmSuccess = z.object({
-  success: z.literal(true),
-});
-
-const deleteFarmFailure = z.object({
-  success: z.literal(false),
-  error: z.string(),
-});
-
-export const deleteFarmResponse = z.union([
-  deleteFarmSuccess,
-  deleteFarmFailure,
+export const deleteFarmResponseSchema = z.union([
+  baseSuccessSchema,
+  baseFailureSchema,
 ]);
 
-export type DeleteFarmRequest = z.infer<typeof deleteFarmRequest>;
-export type DeleteFarmResponse = z.infer<typeof deleteFarmResponse>;
+export type DeleteFarmRequest = z.infer<typeof deleteFarmRequestSchema>;
+export type DeleteFarmResponse = z.infer<typeof deleteFarmResponseSchema>;

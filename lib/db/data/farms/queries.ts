@@ -1,8 +1,8 @@
 import { db } from '@/lib/db';
 import { eq } from 'drizzle-orm';
-import { farmUser } from '../schema/farmUser';
-import { farm } from '../schema/farm';
-import { Farm } from './types';
+import { farmUser } from '../../schema/farmUser';
+import { farm } from '../../schema/farm';
+import { Farm, InsertFarm } from './schema';
 
 export const listUserFarms = async (userId: string): Promise<Farm[]> => {
   const res = await db.query.farm.findMany({
@@ -23,11 +23,11 @@ export const listUserFarms = async (userId: string): Promise<Farm[]> => {
 
 export const createFarm = async (
   userId: string,
-  farmInsert: typeof farm.$inferInsert,
+  insertFarm: InsertFarm,
 ): Promise<Farm> => {
   return await db.transaction(async (tx) => {
     // Create the farm
-    const [newFarm] = await tx.insert(farm).values(farmInsert).returning();
+    const [newFarm] = await tx.insert(farm).values(insertFarm).returning();
 
     // Add the user as a farmer to the farm
     await tx.insert(farmUser).values({

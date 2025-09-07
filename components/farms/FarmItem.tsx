@@ -1,6 +1,6 @@
 'use client';
 
-import { Farm } from '@/lib/db/data/types';
+import { Farm } from '@/lib/db/data/farms';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Trash2 } from 'lucide-react';

@@ -1,4 +1,4 @@
-import { Farm } from '@/lib/db/data/types';
+import { Farm } from '@/lib/db/data/farms';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Link from 'next/link';
