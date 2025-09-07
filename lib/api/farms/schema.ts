@@ -1,7 +1,8 @@
 import { z } from 'zod';
 import { farm } from '@/lib/db/schema/farm';
 
-export const createFarmSchema = z.object({
+// Create Farm Schemas and Types
+export const createFarmRequest = z.object({
   name: z
     .string()
     .min(1, 'Farm name is required')
@@ -9,29 +10,44 @@ export const createFarmSchema = z.object({
   description: z.string().default(''),
 }) satisfies z.ZodType<typeof farm.$inferInsert>;
 
-export type CreateFarmRequest = z.infer<typeof createFarmSchema>;
-export type CreateFarmResponse = CreateFarmSuccess | CreateFarmFailure;
-interface CreateFarmSuccess {
-  id: number;
-  name: string;
-  createdAt: Date;
-  success: true;
-}
-interface CreateFarmFailure {
-  success: false;
-  error: string;
-}
+const createFarmSuccess = z.object({
+  success: z.literal(true),
+  id: z.number(),
+  name: z.string(),
+  createdAt: z.date(),
+});
 
-export const deleteFarmSchema = z.object({
+const createFarmFailure = z.object({
+  success: z.literal(false),
+  error: z.string(),
+});
+
+export const createFarmResponse = z.union([
+  createFarmSuccess,
+  createFarmFailure,
+]);
+
+export type CreateFarmRequest = z.infer<typeof createFarmRequest>;
+export type CreateFarmResponse = z.infer<typeof createFarmResponse>;
+
+// Delete Farm Schemas and Types
+export const deleteFarmRequest = z.object({
   id: z.number(),
 });
 
-export type DeleteFarmRequest = z.infer<typeof deleteFarmSchema>;
-export type DeleteFarmResponse = DeleteFarmSuccess | DeleteFarmFailure;
-interface DeleteFarmSuccess {
-  success: true;
-}
-interface DeleteFarmFailure {
-  success: false;
-  error: string;
-}
+const deleteFarmSuccess = z.object({
+  success: z.literal(true),
+});
+
+const deleteFarmFailure = z.object({
+  success: z.literal(false),
+  error: z.string(),
+});
+
+export const deleteFarmResponse = z.union([
+  deleteFarmSuccess,
+  deleteFarmFailure,
+]);
+
+export type DeleteFarmRequest = z.infer<typeof deleteFarmRequest>;
+export type DeleteFarmResponse = z.infer<typeof deleteFarmResponse>;
