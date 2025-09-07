@@ -17,7 +17,7 @@ export function FarmItem({ farm }: FarmItemProps) {
   });
 
   return (
-    <Link href={`/farm/${farm.id}`}>
+    <Link href={`/farms/${farm.id}`}>
       <Card key={farm.id} className="hover:shadow-md transition-shadow">
         <CardHeader>
           <div className="flex justify-between items-start">
