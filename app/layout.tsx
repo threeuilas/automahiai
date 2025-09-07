@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import React from 'react';
 import Link from 'next/link';
 import { auth } from '@/lib/auth/server';
 import { headers } from 'next/headers';
@@ -18,11 +17,7 @@ export const metadata: Metadata = {
   description: 'Automahiʻai',
 };
 
-export default async function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default async function RootLayout({ children }: LayoutProps<'/'>) {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
