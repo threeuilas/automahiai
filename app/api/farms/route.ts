@@ -1,15 +1,17 @@
 import {
   CreateFarmResponse,
-  createFarmSchema,
+  createFarmRequest,
   DeleteFarmResponse,
-  deleteFarmSchema,
+  deleteFarmRequest,
 } from '@/lib/api/farms/schema';
 import { auth } from '@/lib/auth/server';
 import { createFarm, deleteFarm } from '@/lib/db/data/farms';
 import { NextResponse } from 'next/server';
 import z from 'zod';
 
-export async function POST(request: Request) {
+export async function POST(
+  request: Request,
+): Promise<NextResponse<CreateFarmResponse>> {
   try {
     // Get the session
     const session = await auth.api.getSession({
@@ -25,7 +27,7 @@ export async function POST(request: Request) {
 
     // Parse the request body
     const body = await request.json();
-    const result = createFarmSchema.safeParse(body);
+    const result = createFarmRequest.safeParse(body);
     if (!result.success) {
       return NextResponse.json<CreateFarmResponse>(
         { success: false, error: z.prettifyError(result.error) },
@@ -36,7 +38,7 @@ export async function POST(request: Request) {
     // Create the farm
     const farm = await createFarm(session.user.id, result.data);
 
-    return NextResponse.json(farm, { status: 201 });
+    return NextResponse.json({ ...farm, success: true }, { status: 201 });
   } catch (error) {
     console.error('Error creating farm:', error);
     return NextResponse.json<CreateFarmResponse>(
@@ -62,7 +64,7 @@ export async function DELETE(request: Request) {
 
     // Parse the request body
     const body = await request.json();
-    const result = deleteFarmSchema.safeParse(body);
+    const result = deleteFarmRequest.safeParse(body);
     if (!result.success) {
       return NextResponse.json<DeleteFarmResponse>(
         { success: false, error: z.prettifyError(result.error) },

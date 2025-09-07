@@ -2,13 +2,17 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { CreateFarmRequest, createFarmSchema } from '@/lib/api/farms/schema';
+import {
+  CreateFarmRequest,
+  createFarmResponse,
+  createFarmRequest,
+} from '@/lib/api/farms/schema';
 
 export function useCreateFarm() {
   const router = useRouter();
   const form = useForm({
     defaultValues: { name: '', description: '' },
-    resolver: zodResolver(createFarmSchema),
+    resolver: zodResolver(createFarmRequest),
   });
 
   const [loading, setLoading] = useState(false);
@@ -27,8 +31,13 @@ export function useCreateFarm() {
       if (!res.ok) {
         throw new Error('Failed to create farm');
       }
-
-      router.push('/farms');
+      const response = createFarmResponse.safeParse(await res.json());
+      if (!response.success) {
+        throw new Error('Invalid response from server');
+      } else if (!response.data.success) {
+        throw new Error(response.data.error);
+      }
+      router.push(`/farms/${response.data.id}`);
       router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
