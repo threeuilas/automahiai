@@ -4,7 +4,7 @@ import { Farm } from '@/lib/db/data/farms';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Trash2 } from 'lucide-react';
-import { useDeleteFarm } from './useDeleteFarm';
+import { useDeleteFarm } from '../hooks/useDeleteFarm';
 import Link from 'next/link';
 
 interface FarmItemProps {

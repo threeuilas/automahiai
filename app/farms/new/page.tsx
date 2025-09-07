@@ -1,4 +1,4 @@
-import { CreateFarmForm } from '@/components/farms/CreateFarmForm';
+import { CreateFarmForm } from '@/components/farms/elements/CreateFarmForm';
 import { auth } from '@/lib/auth/server';
 import { headers } from 'next/headers';
 

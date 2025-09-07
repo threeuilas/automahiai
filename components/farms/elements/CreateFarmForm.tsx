@@ -18,7 +18,7 @@ import {
   FormControl,
   FormMessage,
 } from '@/components/ui/form';
-import { useCreateFarm } from './useCreateFarm';
+import { useCreateFarm } from '../hooks/useCreateFarm';
 import Link from 'next/link';
 
 export interface CreateFarmFormValues {

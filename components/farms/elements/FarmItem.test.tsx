@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { useRouter } from 'next/navigation';
 import { FarmItem } from './FarmItem';
-import { useDeleteFarm } from './useDeleteFarm';
+import { useDeleteFarm } from '../hooks/useDeleteFarm';
 import '@testing-library/jest-dom';
 
 // Mock next/navigation
