@@ -52,7 +52,7 @@ describe('FarmList', () => {
     expect(
       screen.getByRole('link', { name: 'Create Your First Farm' }),
     ).toBeInTheDocument();
-    expect(screen.getByRole('link')).toHaveAttribute('href', '/farm/new');
+    expect(screen.getByRole('link')).toHaveAttribute('href', '/farms/new');
   });
 
   it('renders farm items when farms are provided', () => {

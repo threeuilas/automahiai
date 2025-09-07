@@ -5,8 +5,8 @@ import React from 'react';
 import Link from 'next/link';
 import { auth } from '@/lib/auth/server';
 import { headers } from 'next/headers';
-import { SignoutButton } from '../components/auth/elements/SignoutButton';
 import { LoginButton } from '@/components/auth/elements/LoginButton';
+import { NavigationDropdown } from '@/components/ui/navigation-dropdown';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -42,18 +42,11 @@ export default async function RootLayout({
                 </Link>
               </div>
 
-              <div className="flex items-center gap-4">
-                <a className="text-white" href="/farm">
-                  Farm
-                </a>
+              <div className="flex items-center gap-6">
                 {session ? (
-                  <span className="text-white flex items-center gap-3">
-                    <span>Welcome {session.user.name}</span>
-                    <SignoutButton variant="secondary" text="Sign Out" />
-                  </span>
+                  <NavigationDropdown userName={session.user.name || 'User'} />
                 ) : (
                   <>
-                    <span className="text-white">Not authenticated</span>
                     <LoginButton variant="secondary" text="Login" />
                   </>
                 )}

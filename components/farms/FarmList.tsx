@@ -22,7 +22,7 @@ export function FarmList({ farms }: FarmListProps) {
               started!
             </p>
             <Button asChild>
-              <Link href="/farm/new">Create Your First Farm</Link>
+              <Link href="/farms/new">Create Your First Farm</Link>
             </Button>
           </CardContent>
         </Card>

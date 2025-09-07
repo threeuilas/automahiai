@@ -2,7 +2,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { CreateFarmRequest, createFarmSchema } from '@/lib/api/farm/schema';
+import { CreateFarmRequest, createFarmSchema } from '@/lib/api/farms/schema';
 
 export function useCreateFarm() {
   const router = useRouter();
@@ -19,7 +19,7 @@ export function useCreateFarm() {
     setError(undefined);
 
     try {
-      const res = await fetch('/api/farm', {
+      const res = await fetch('/api/farms', {
         method: 'POST',
         body: JSON.stringify(formValues),
       });
@@ -28,7 +28,7 @@ export function useCreateFarm() {
         throw new Error('Failed to create farm');
       }
 
-      router.push('/farm');
+      router.push('/farms');
       router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');

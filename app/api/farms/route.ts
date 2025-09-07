@@ -3,7 +3,7 @@ import {
   createFarmSchema,
   DeleteFarmResponse,
   deleteFarmSchema,
-} from '@/lib/api/farm/schema';
+} from '@/lib/api/farms/schema';
 import { auth } from '@/lib/auth/server';
 import { createFarm, deleteFarm } from '@/lib/db/data/farms';
 import { NextResponse } from 'next/server';
