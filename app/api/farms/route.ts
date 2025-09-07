@@ -1,9 +1,9 @@
 import {
   CreateFarmResponse,
-  createFarmRequest,
+  createFarmRequestSchema,
   DeleteFarmResponse,
-  deleteFarmRequest,
-} from '@/lib/api/farms/schema';
+  deleteFarmRequestSchema,
+} from '@/lib/api/farms';
 import { auth } from '@/lib/auth/server';
 import { createFarm, deleteFarm } from '@/lib/db/data/farms';
 import { NextResponse } from 'next/server';
@@ -27,7 +27,7 @@ export async function POST(
 
     // Parse the request body
     const body = await request.json();
-    const result = createFarmRequest.safeParse(body);
+    const result = createFarmRequestSchema.safeParse(body);
     if (!result.success) {
       return NextResponse.json<CreateFarmResponse>(
         { success: false, error: z.prettifyError(result.error) },
@@ -64,7 +64,7 @@ export async function DELETE(request: Request) {
 
     // Parse the request body
     const body = await request.json();
-    const result = deleteFarmRequest.safeParse(body);
+    const result = deleteFarmRequestSchema.safeParse(body);
     if (!result.success) {
       return NextResponse.json<DeleteFarmResponse>(
         { success: false, error: z.prettifyError(result.error) },

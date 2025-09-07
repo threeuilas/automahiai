@@ -1,6 +1,6 @@
 import { FarmList } from '@/components/farms/FarmList';
 import { auth } from '@/lib/auth/server';
-import { listUserFarms } from '@/lib/db/data/farms';
+import { listUserFarms } from '@/lib/db/data/farms/queries';
 import { headers } from 'next/headers';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';

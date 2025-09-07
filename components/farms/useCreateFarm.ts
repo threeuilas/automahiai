@@ -4,15 +4,15 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   CreateFarmRequest,
-  createFarmResponse,
-  createFarmRequest,
+  createFarmResponseSchema,
+  createFarmRequestSchema,
 } from '@/lib/api/farms/schema';
 
 export function useCreateFarm() {
   const router = useRouter();
   const form = useForm({
     defaultValues: { name: '', description: '' },
-    resolver: zodResolver(createFarmRequest),
+    resolver: zodResolver(createFarmRequestSchema),
   });
 
   const [loading, setLoading] = useState(false);
@@ -31,7 +31,7 @@ export function useCreateFarm() {
       if (!res.ok) {
         throw new Error('Failed to create farm');
       }
-      const response = createFarmResponse.safeParse(await res.json());
+      const response = createFarmResponseSchema.safeParse(await res.json());
       if (!response.success) {
         throw new Error('Invalid response from server');
       } else if (!response.data.success) {
