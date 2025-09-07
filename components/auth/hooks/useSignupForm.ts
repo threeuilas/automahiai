@@ -23,6 +23,8 @@ export function useSignupForm(destination: string = '/') {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | undefined>(undefined);
 
+  router.prefetch(destination);
+
   const onValid = async (values: SignupFormValues) => {
     setLoading(true);
     setError(undefined);

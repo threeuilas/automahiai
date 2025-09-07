@@ -17,6 +17,8 @@ export function useLoginForm(destination: string = '/') {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | undefined>(undefined);
 
+  router.prefetch(destination);
+
   const onValid = async () => {
     setLoading(true);
     setError(undefined);
@@ -24,6 +26,7 @@ export function useLoginForm(destination: string = '/') {
     const result = await signIn.email({
       email: form.getValues('email'),
       password: form.getValues('password'),
+      rememberMe: form.getValues('remember'),
     });
     if (result.error) {
       setError(result.error?.message);

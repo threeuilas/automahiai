@@ -5,6 +5,9 @@ import { useState } from 'react';
 export function useSignout(redirect: string = '/') {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+
+  router.prefetch(redirect);
+
   const signout = async () => {
     setLoading(true);
     await signOut({

@@ -18,11 +18,14 @@ const mockUseRouter = jest.mocked(useRouter);
 describe('useSignupForm', () => {
   const push = jest.fn();
   const refresh = jest.fn();
+  const prefetch = jest.fn();
   beforeEach(() => {
     jest.clearAllMocks();
-    mockUseRouter.mockReturnValue({ push, refresh } as unknown as ReturnType<
-      typeof useRouter
-    >);
+    mockUseRouter.mockReturnValue({
+      push,
+      refresh,
+      prefetch,
+    } as unknown as ReturnType<typeof useRouter>);
   });
 
   it('should initialize with default values', () => {
@@ -51,6 +54,11 @@ describe('useSignupForm', () => {
     await act(async () => {
       await result.current.signup();
     });
+    expect(mockSignUp).toHaveBeenCalledWith({
+      name: 'Test User',
+      email: 'test@example.com',
+      password: 'password',
+    });
     expect(result.current.error).toBe('Signup failed');
     expect(result.current.loading).toBe(false);
     expect(push).not.toHaveBeenCalled();
@@ -68,6 +76,11 @@ describe('useSignupForm', () => {
     });
     await act(async () => {
       await result.current.signup();
+    });
+    expect(mockSignUp).toHaveBeenCalledWith({
+      name: 'Test User',
+      email: 'test@example.com',
+      password: 'password',
     });
     expect(result.current.error).toBeUndefined();
     expect(result.current.loading).toBe(false);
