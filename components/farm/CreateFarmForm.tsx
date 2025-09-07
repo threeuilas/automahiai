@@ -88,7 +88,7 @@ export function CreateFarmForm({ redirect = '/farm' }: CreateFarmFormProps) {
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? 'Creating Farm...' : 'Create Farm'}
             </Button>
-            <Button type="button" variant="outline" className="w-full">
+            <Button asChild type="button" variant="outline" className="w-full">
               <Link href={redirect}>Cancel</Link>
             </Button>
           </CardFooter>

@@ -132,7 +132,12 @@ export function SignupForm({ redirect }: SignupFormProps) {
               <Button type="submit" className="w-full" disabled={loading}>
                 {loading ? 'Signing up...' : 'Sign Up'}
               </Button>
-              <Button type="button" variant="outline" className="w-full">
+              <Button
+                asChild
+                type="button"
+                variant="outline"
+                className="w-full"
+              >
                 <Link href={loginUrl}>Already have an account? Login</Link>
               </Button>
             </CardFooter>

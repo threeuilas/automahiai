@@ -107,7 +107,7 @@ export function LoginForm({ redirect }: LoginFormProps) {
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? 'Logging in...' : 'Login'}
             </Button>
-            <Button type="button" variant="outline" className="w-full">
+            <Button asChild type="button" variant="outline" className="w-full">
               <Link href={signupUrl}>Sign up</Link>
             </Button>
           </CardFooter>

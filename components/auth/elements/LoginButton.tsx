@@ -22,7 +22,7 @@ export const LoginButton = ({
   }
 
   return (
-    <Button {...props}>
+    <Button {...props} asChild>
       <Link href={`/login?${REDIRECT_PARAM}=${encodeURIComponent(redirect)}`}>
         {text}
       </Link>
