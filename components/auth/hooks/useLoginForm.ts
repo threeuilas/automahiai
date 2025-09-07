@@ -17,8 +17,6 @@ export function useLoginForm(destination: string = '/') {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | undefined>(undefined);
 
-  router.prefetch(destination);
-
   const onValid = async () => {
     setLoading(true);
     setError(undefined);

@@ -17,13 +17,11 @@ const mockUseRouter = jest.mocked(useRouter);
 describe('useSignout', () => {
   const push = jest.fn();
   const refresh = jest.fn();
-  const prefetch = jest.fn();
   beforeEach(() => {
     jest.clearAllMocks();
     mockUseRouter.mockReturnValue({
       push,
       refresh,
-      prefetch,
     } as unknown as ReturnType<typeof useRouter>);
   });
 
