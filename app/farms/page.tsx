@@ -1,4 +1,4 @@
-import { FarmList } from '@/components/farms/FarmList';
+import { FarmList } from '@/components/farms/elements/FarmList';
 import { auth } from '@/lib/auth/server';
 import { listUserFarms } from '@/lib/db/data/farms/queries';
 import { headers } from 'next/headers';
