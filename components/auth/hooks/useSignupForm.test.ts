@@ -64,6 +64,35 @@ describe('useSignupForm', () => {
     expect(push).not.toHaveBeenCalled();
   });
 
+  it('should not call signUp if form contents are invalid', async () => {
+    const { result } = renderHook(() => useSignupForm('/dashboard'));
+    act(() => {
+      result.current.form.setValue('name', ''); // Name is required
+      result.current.form.setValue('email', 'invalid-email'); // Invalid email
+      result.current.form.setValue('password', 'pass');
+      result.current.form.setValue('confirmPassword', 'different'); // Does not match
+      result.current.form.setValue('agreeToTerms', false); // Must be true
+    });
+    await act(async () => {
+      await result.current.signup();
+    });
+    expect(mockSignUp).not.toHaveBeenCalled();
+    expect(result.current.form.getFieldState('name').error).toBeDefined();
+    expect(result.current.form.getFieldState('email').error).toBeDefined();
+    expect(result.current.form.getFieldState('password').error).toBeDefined();
+    expect(
+      result.current.form.getFieldState('confirmPassword').error,
+    ).toBeDefined();
+    expect(
+      result.current.form.getFieldState('agreeToTerms').error,
+    ).toBeDefined();
+    expect(
+      result.current.form.getFieldState('agreeToTerms').error,
+    ).toBeDefined();
+    expect(result.current.error).toBeUndefined();
+    expect(result.current.loading).toBe(false);
+  });
+
   it('should redirect and refresh on successful signup', async () => {
     mockSignUp.mockResolvedValueOnce({ data: { user: { id: 1 } } });
     const { result } = renderHook(() => useSignupForm('/dashboard'));

@@ -39,6 +39,22 @@ describe('useLoginForm', () => {
     expect(result.current.error).toBeUndefined();
   });
 
+  it('should not call signUp if form contents are invalid', async () => {
+    const { result } = renderHook(() => useLoginForm('/dashboard'));
+    act(() => {
+      result.current.form.setValue('email', 'invalid-email'); // Invalid email
+      result.current.form.setValue('password', 'pass');
+    });
+    await act(async () => {
+      await result.current.login();
+    });
+    expect(mockSignIn).not.toHaveBeenCalled();
+    expect(result.current.form.getFieldState('email').error).toBeDefined();
+    expect(result.current.form.getFieldState('password').error).toBeDefined();
+    expect(result.current.error).toBeUndefined();
+    expect(result.current.loading).toBe(false);
+  });
+
   it('should set error if signIn returns error', async () => {
     mockSignIn.mockResolvedValueOnce({
       error: { message: 'Invalid credentials' },

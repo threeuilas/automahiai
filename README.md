@@ -34,3 +34,15 @@ $ pnpm generate
 ...
 $ pnpm migrate
 ```
+
+#### Note on NODE_OPTIONS for Drizzle CLI
+
+The `pnpm generate` script automatically sets the environment variable:
+
+```bash
+NODE_OPTIONS='--conditions=react-server'
+```
+
+This is required because the Drizzle code uses `import 'server-only'`, which needs this Node.js option to resolve correctly in a CLI environment. You do not need to set this variable manually—it's handled by the script.
+
+The `pnpm migrate` command does not import `server-only`, so it does not require this option.

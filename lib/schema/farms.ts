@@ -9,10 +9,7 @@ export const farmSchema = z.object({
     .min(1, 'Farm name is required')
     .max(100, 'Farm name must be less than 100 characters'),
   description: z.string(),
-  createdAt: z.date(),
-}) satisfies z.ZodType<
-  Omit<typeof farm.$inferSelect, 'updatedAt' | 'deletedAt'>
->;
+}) satisfies z.ZodType<Omit<typeof farm.$inferSelect, keyof typeof timestamps>>;
 
 export const insertFarmSchema = farmSchema.omit({ id: true }).partial({
   description: true,

@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { SignupFormValues, SignupSchema } from '@/lib/schema/auth';
+import { SignupFormValues, signupSchema } from '@/lib/schema/auth';
 import { signUp } from '@/lib/auth/client';
 
 export function useSignupForm(destination: string = '/') {
@@ -18,7 +18,7 @@ export function useSignupForm(destination: string = '/') {
     },
     mode: 'onSubmit',
     reValidateMode: 'onChange',
-    resolver: zodResolver(SignupSchema),
+    resolver: zodResolver(signupSchema),
   });
 
   const [loading, setLoading] = useState(false);

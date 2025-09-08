@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { signIn } from '@/lib/auth/client';
-import { LoginFormValues, LoginSchema } from '@/lib/schema/auth';
+import { LoginFormValues, loginSchema } from '@/lib/schema/auth';
 
 export function useLoginForm(destination: string = '/') {
   const router = useRouter();
@@ -12,7 +12,7 @@ export function useLoginForm(destination: string = '/') {
     defaultValues: { email: '', password: '', remember: false },
     mode: 'onSubmit',
     reValidateMode: 'onChange',
-    resolver: zodResolver(LoginSchema),
+    resolver: zodResolver(loginSchema),
   });
 
   const [loading, setLoading] = useState(false);

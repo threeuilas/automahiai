@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-import { Farm, farmSchema, insertFarmSchema } from '@/lib/schema/farms';
+import { farmSchema, insertFarmSchema } from '@/lib/schema/farms';
 
 const baseSuccessSchema = z.object({
   success: z.literal(true),
@@ -16,7 +16,7 @@ export const createFarmRequestSchema = insertFarmSchema;
 const createFarmSuccessSchema = z.object({
   ...farmSchema.shape,
   ...baseSuccessSchema.shape,
-}) satisfies z.ZodType<Farm>;
+});
 
 export const createFarmResponseSchema = z.union([
   createFarmSuccessSchema,
@@ -25,6 +25,25 @@ export const createFarmResponseSchema = z.union([
 
 export type CreateFarmRequest = z.infer<typeof createFarmRequestSchema>;
 export type CreateFarmResponse = z.infer<typeof createFarmResponseSchema>;
+
+// Update Farm Schemas and Types
+export const updateFarmRequestSchema = z.object({
+  ...farmSchema.pick({ id: true }).shape,
+  updates: insertFarmSchema.partial({ name: true }),
+});
+
+const updateFarmSuccessSchema = z.object({
+  ...farmSchema.shape,
+  ...baseSuccessSchema.shape,
+});
+
+export const updateFarmResponseSchema = z.union([
+  updateFarmSuccessSchema,
+  baseFailureSchema,
+]);
+
+export type UpdateFarmRequest = z.infer<typeof updateFarmRequestSchema>;
+export type UpdateFarmResponse = z.infer<typeof updateFarmResponseSchema>;
 
 // Delete Farm Schemas and Types
 export const deleteFarmRequestSchema = farmSchema.pick({
