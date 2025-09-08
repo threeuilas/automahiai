@@ -48,17 +48,19 @@ export const updateFarm = async (
   farmId: number,
   updateData: Partial<InsertFarm>,
 ): Promise<Farm | undefined> => {
-  const [updatedFarm] = await db
+  const res = await db
     .update(farm)
     .set(updateData)
     .where(eq(farm.id, farmId))
     .returning();
 
-  return {
-    id: updatedFarm.id,
-    name: updatedFarm.name,
-    description: updatedFarm.description,
-  };
+  return res.length > 0
+    ? {
+        id: res[0].id,
+        name: res[0].name,
+        description: res[0].description,
+      }
+    : undefined;
 };
 
 export const deleteFarm = async (farmId: number): Promise<void> => {
