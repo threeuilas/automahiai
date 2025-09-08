@@ -2,8 +2,9 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import Link from 'next/link';
-import { auth } from '@/lib/auth/server';
 import { headers } from 'next/headers';
+
+import { auth } from '@/lib/auth/server';
 import { LoginButton } from '@/components/auth/elements/LoginButton';
 import { NavigationDropdown } from '@/components/ui/navigation-dropdown';
 

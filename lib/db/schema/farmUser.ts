@@ -6,15 +6,15 @@ import {
   text,
 } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
+
+import { FARM_USER_ROLES } from '@/lib/schema/farmUser';
+
 import { timestamps } from './helpers';
 import { farm } from './farm';
 import { user } from './auth-schema';
 
 // Enum for user roles in a farm
-export const farmUserRoleEnum = pgEnum('farm_user_role', [
-  'farmer',
-  'customer',
-]);
+export const farmUserRoleEnum = pgEnum('farm_user_role', FARM_USER_ROLES);
 
 // Junction table for user-farm relationships with role
 export const farmUser = pgTable(

@@ -4,10 +4,11 @@
  */
 
 import type { Config } from 'jest';
-
 import nextJest from 'next/jest.js';
 import { pathsToModuleNameMapper } from 'ts-jest';
+
 import tsconfig from './tsconfig.json' with { type: 'json' };
+
 const { compilerOptions } = tsconfig;
 
 const createJestConfig = nextJest({
@@ -25,6 +26,9 @@ const config: Config = {
     prefix: '<rootDir>/',
   }),
   preset: 'ts-jest',
+
+  // Automatically import custom matchers from jest-dom in all tests
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
 
   // All imported modules in your tests should be mocked automatically
   // automock: false,

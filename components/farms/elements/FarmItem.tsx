@@ -1,11 +1,13 @@
 'use client';
 
-import { Farm } from '@/lib/db/data/farms';
+import { Trash2 } from 'lucide-react';
+import Link from 'next/link';
+
+import type { Farm } from '@/lib/schema/farms';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Trash2 } from 'lucide-react';
+
 import { useDeleteFarm } from '../hooks/useDeleteFarm';
-import Link from 'next/link';
 
 interface FarmItemProps {
   farm: Farm;

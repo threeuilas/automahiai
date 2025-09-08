@@ -1,8 +1,8 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { useSignout } from '../hooks/useSignout';
 import { usePathname } from 'next/navigation';
+
+import { useSignout } from '../hooks/useSignout';
 import { SignoutButton } from './SignoutButton';
-import '@testing-library/jest-dom';
 
 jest.mock('next/navigation', () => ({
   usePathname: jest.fn(),

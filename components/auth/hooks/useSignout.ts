@@ -1,6 +1,7 @@
-import { signOut } from '@/lib/auth/client';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+
+import { signOut } from '@/lib/auth/client';
 
 export function useSignout(redirect: string = '/') {
   const router = useRouter();

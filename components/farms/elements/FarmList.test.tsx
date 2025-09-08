@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
+
 import { FarmList } from './FarmList';
-import '@testing-library/jest-dom';
 
 // Mock Next.js Link component
 jest.mock('next/link', () => {

@@ -1,3 +1,6 @@
+import { NextResponse } from 'next/server';
+import z from 'zod';
+
 import {
   CreateFarmResponse,
   createFarmRequestSchema,
@@ -6,8 +9,7 @@ import {
 } from '@/lib/api/farms';
 import { auth } from '@/lib/auth/server';
 import { createFarm, deleteFarm } from '@/lib/db/data/farms';
-import { NextResponse } from 'next/server';
-import z from 'zod';
+import { getFarmUserRole } from '@/lib/db/data/farmUser';
 
 export async function POST(
   request: Request,
@@ -71,10 +73,22 @@ export async function DELETE(request: Request) {
         { status: 400 },
       );
     }
-    const { id } = result.data;
+    const farmId = result.data.id;
+
+    // Check if the user is authorized to delete the farm
+    const farmUserRole = session
+      ? await getFarmUserRole(session.user.id, farmId)
+      : undefined;
+
+    if (farmUserRole !== 'farmer') {
+      return NextResponse.json<DeleteFarmResponse>(
+        { success: false, error: 'Unauthorized' },
+        { status: 403 },
+      );
+    }
 
     // Delete the farm
-    await deleteFarm(id);
+    await deleteFarm(farmId);
 
     return NextResponse.json<DeleteFarmResponse>(
       { success: true },
