@@ -84,7 +84,7 @@ describe('useSignupForm', () => {
       result.current.form.getFieldState('confirmPassword').error,
     ).toBeDefined();
     expect(
-      result.current.form.getFieldState('confirmPassword').error,
+      result.current.form.getFieldState('agreeToTerms').error,
     ).toBeDefined();
     expect(
       result.current.form.getFieldState('agreeToTerms').error,
