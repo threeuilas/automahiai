@@ -97,13 +97,14 @@ export async function PATCH(
     }
 
     // Update the farm
-    const updatedFarm = await updateFarm(farmId, result.data);
+    const updatedFarm = await updateFarm(farmId, result.data.updates);
     if (!updatedFarm) {
       return NextResponse.json<UpdateFarmResponse>(
         { success: false, error: 'Farm not found' },
         { status: 404 },
       );
     }
+
     return NextResponse.json(
       { ...updatedFarm, success: true },
       { status: 200 },

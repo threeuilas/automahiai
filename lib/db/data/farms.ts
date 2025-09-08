@@ -1,5 +1,5 @@
 import 'server-only';
-import { eq, sql } from 'drizzle-orm';
+import { eq } from 'drizzle-orm';
 
 import { db } from '@/lib/db';
 import { farmUser, farm } from '@/lib/db/schema';
@@ -50,7 +50,7 @@ export const updateFarm = async (
 ): Promise<Farm | undefined> => {
   const [updatedFarm] = await db
     .update(farm)
-    .set({ ...updateData, updatedAt: sql`NOW()` })
+    .set(updateData)
     .where(eq(farm.id, farmId))
     .returning();
 

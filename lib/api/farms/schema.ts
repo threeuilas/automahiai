@@ -28,7 +28,8 @@ export type CreateFarmResponse = z.infer<typeof createFarmResponseSchema>;
 
 // Update Farm Schemas and Types
 export const updateFarmRequestSchema = z.object({
-  ...farmSchema.partial({ name: true, description: true }).shape,
+  ...farmSchema.pick({ id: true }).shape,
+  updates: insertFarmSchema.partial({ name: true }),
 });
 
 const updateFarmSuccessSchema = z.object({

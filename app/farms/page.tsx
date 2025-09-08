@@ -12,7 +12,6 @@ export default async function Farm() {
   const session = await auth.api.getSession({
     headers: await headers(), // you need to pass the headers object.
   });
-  console.log(session);
 
   if (!session?.user) {
     redirect(`/login?${REDIRECT_PARAM}=${encodeURIComponent('/farms')}`);
