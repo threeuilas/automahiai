@@ -10,7 +10,7 @@ jest.mock('next/navigation', () => ({
 }));
 
 // Mock the useDeleteFarm hook
-jest.mock('./useDeleteFarm', () => ({
+jest.mock('../hooks/useDeleteFarm', () => ({
   useDeleteFarm: jest.fn(),
 }));
 
