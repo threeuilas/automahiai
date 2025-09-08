@@ -1,4 +1,6 @@
 'use client';
+import Link from 'next/link';
+
 import {
   Card,
   CardHeader,
@@ -18,9 +20,9 @@ import {
   FormControl,
   FormMessage,
 } from '@/components/ui/form';
+
 import { useSignupForm } from '../hooks/useSignupForm';
 import { REDIRECT_PARAM } from '../constants';
-import Link from 'next/link';
 
 interface SignupFormProps {
   redirect: string;

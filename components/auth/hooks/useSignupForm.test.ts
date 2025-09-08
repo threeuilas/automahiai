@@ -1,7 +1,9 @@
 import { act, renderHook } from '@testing-library/react';
-import { useSignupForm } from './useSignupForm';
-import { signUp } from '@/lib/auth/client';
 import { useRouter } from 'next/navigation';
+
+import { signUp } from '@/lib/auth/client';
+
+import { useSignupForm } from './useSignupForm';
 
 jest.mock('@/lib/auth/client', () => ({
   signUp: {

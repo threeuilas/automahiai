@@ -1,6 +1,7 @@
+import { headers } from 'next/headers';
+
 import { CreateFarmForm } from '@/components/farms/elements/CreateFarmForm';
 import { auth } from '@/lib/auth/server';
-import { headers } from 'next/headers';
 
 export default async function CreateFarm() {
   const session = await auth.api.getSession({

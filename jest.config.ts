@@ -4,10 +4,11 @@
  */
 
 import type { Config } from 'jest';
-
 import nextJest from 'next/jest.js';
 import { pathsToModuleNameMapper } from 'ts-jest';
+
 import tsconfig from './tsconfig.json' with { type: 'json' };
+
 const { compilerOptions } = tsconfig;
 
 const createJestConfig = nextJest({

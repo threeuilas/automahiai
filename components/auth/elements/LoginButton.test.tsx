@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import { usePathname, useSearchParams } from 'next/navigation';
-import { LoginButton } from './LoginButton';
 import '@testing-library/jest-dom';
+import { usePathname, useSearchParams } from 'next/navigation';
+
+import { LoginButton } from './LoginButton';
 import { REDIRECT_PARAM } from '../constants';
 
 jest.mock('next/navigation', () => ({

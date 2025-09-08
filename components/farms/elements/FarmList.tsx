@@ -1,7 +1,9 @@
+import Link from 'next/link';
+
 import type { Farm } from '@/lib/schema/farms';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import Link from 'next/link';
+
 import { FarmItem } from './FarmItem';
 
 interface FarmListProps {

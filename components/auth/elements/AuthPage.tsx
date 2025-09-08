@@ -1,7 +1,9 @@
-import { auth } from '@/lib/auth/server';
-import { LoginForm } from './LoginForm';
-import { SignoutButton } from '@/components/auth/elements/SignoutButton';
 import { headers } from 'next/headers';
+
+import { auth } from '@/lib/auth/server';
+import { SignoutButton } from '@/components/auth/elements/SignoutButton';
+
+import { LoginForm } from './LoginForm';
 import { SignupForm } from './SignupForm';
 
 interface AuthPageProps {

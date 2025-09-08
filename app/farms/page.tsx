@@ -1,10 +1,11 @@
+import { headers } from 'next/headers';
+import Link from 'next/link';
+import { redirect } from 'next/navigation';
+
 import { FarmList } from '@/components/farms/elements/FarmList';
 import { auth } from '@/lib/auth/server';
 import { listUserFarms } from '@/lib/db/data/farms';
-import { headers } from 'next/headers';
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { redirect } from 'next/navigation';
 import { REDIRECT_PARAM } from '@/components/auth/constants';
 
 export default async function Farm() {

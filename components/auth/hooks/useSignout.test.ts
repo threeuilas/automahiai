@@ -1,8 +1,10 @@
 import { act, renderHook } from '@testing-library/react';
-import { useSignout } from './useSignout';
-import { signOut } from '@/lib/auth/client';
 import { useRouter } from 'next/navigation';
 import { SuccessContext } from 'better-auth/react';
+
+import { signOut } from '@/lib/auth/client';
+
+import { useSignout } from './useSignout';
 
 jest.mock('@/lib/auth/client', () => ({
   signOut: jest.fn(),
