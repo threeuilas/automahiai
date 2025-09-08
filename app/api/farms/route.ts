@@ -67,7 +67,7 @@ export async function PATCH(
     });
 
     if (!session?.user?.id) {
-      return NextResponse.json<CreateFarmResponse>(
+      return NextResponse.json<UpdateFarmResponse>(
         { success: false, error: 'Authentication required' },
         { status: 401 },
       );
@@ -77,7 +77,7 @@ export async function PATCH(
     const body = await request.json();
     const result = updateFarmRequestSchema.safeParse(body);
     if (!result.success) {
-      return NextResponse.json<CreateFarmResponse>(
+      return NextResponse.json<UpdateFarmResponse>(
         { success: false, error: z.prettifyError(result.error) },
         { status: 400 },
       );
