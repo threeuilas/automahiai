@@ -1,5 +1,4 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import { usePathname } from 'next/navigation';
 
 import { useSignout } from '../hooks/useSignout';

@@ -27,6 +27,9 @@ const config: Config = {
   }),
   preset: 'ts-jest',
 
+  // Automatically import custom matchers from jest-dom in all tests
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
+
   // All imported modules in your tests should be mocked automatically
   // automock: false,
 

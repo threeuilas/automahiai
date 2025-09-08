@@ -41,11 +41,11 @@ export default defineConfig([
       'import/newline-after-import': 'error',
       'import/no-duplicates': 'error',
     },
-      settings: {
-        'import/resolver': {
-          typescript: {},
-        },
+    settings: {
+      'import/resolver': {
+        typescript: {},
       },
+    },
   },
   eslintConfigPrettier,
 ]);

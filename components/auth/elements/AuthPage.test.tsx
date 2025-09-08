@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import { headers } from 'next/headers';
 
 import { AuthPage } from '@/components/auth/elements/AuthPage';

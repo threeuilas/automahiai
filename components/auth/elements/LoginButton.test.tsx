@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react';
-import '@testing-library/jest-dom';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 import { LoginButton } from './LoginButton';
