@@ -6,7 +6,7 @@ import {
   CreateFarmRequest,
   createFarmResponseSchema,
   createFarmRequestSchema,
-} from '@/lib/api/farms/schema';
+} from '@/lib/api/farms';
 
 export function useCreateFarm() {
   const router = useRouter();
