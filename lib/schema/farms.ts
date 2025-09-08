@@ -1,6 +1,5 @@
 import z from 'zod';
-import { farm } from '../../schema/farm';
-import { timestamps } from '../../schema';
+import type { farm, timestamps } from '@/lib/db/schema';
 
 export const farmSchema = z.object({
   id: z.number(),

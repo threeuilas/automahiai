@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { LoginFormValues, LoginSchema } from '@/lib/auth/schema';
+import { LoginFormValues, LoginSchema } from '@/lib/schema/auth';
 
 export function useLoginForm(destination: string = '/') {
   const router = useRouter();

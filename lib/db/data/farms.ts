@@ -1,8 +1,8 @@
-import { db } from '@/lib/db';
+import 'server-only';
 import { eq } from 'drizzle-orm';
-import { farmUser } from '../../schema/farmUser';
-import { farm } from '../../schema/farm';
-import { Farm, InsertFarm } from './schema';
+import { db } from '@/lib/db';
+import { farmUser, farm } from '@/lib/db/schema';
+import { Farm, InsertFarm } from '@/lib/schema/farms';
 
 export const listUserFarms = async (userId: string): Promise<Farm[]> => {
   const res = await db.query.farm.findMany({

@@ -1,4 +1,8 @@
+import { FarmDetailsElement } from '@/components/farms/elements/FarmDetailsElement';
+import { auth } from '@/lib/auth/server';
 import { getFarm } from '@/lib/db/data/farms';
+import { getFarmUserRole } from '@/lib/db/data/farmUser';
+import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 
 export default async function FarmPage(props: PageProps<'/farms/[id]'>) {
@@ -9,13 +13,13 @@ export default async function FarmPage(props: PageProps<'/farms/[id]'>) {
   const farm = await getFarm(farmId);
   if (!farm) return notFound();
 
-  return (
-    <main className="p-8">
-      <h1 className="text-2xl font-bold mb-2">{farm.name}</h1>
-      <p className="mb-4 text-gray-700">{farm.description}</p>
-      <div className="text-sm text-gray-500">
-        Created: {new Date(farm.createdAt).toLocaleString()}
-      </div>
-    </main>
-  );
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  const role = session
+    ? await getFarmUserRole(session.user.id, farmId)
+    : undefined;
+
+  return <FarmDetailsElement farm={farm} role={role} loggedIn={!!session} />;
 }

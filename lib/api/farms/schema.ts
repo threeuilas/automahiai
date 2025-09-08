@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { Farm, farmSchema, insertFarmSchema } from '@/lib/db/data/farms';
+import { Farm, farmSchema, insertFarmSchema } from '@/lib/schema/farms';
 
 const baseSuccessSchema = z.object({
   success: z.literal(true),

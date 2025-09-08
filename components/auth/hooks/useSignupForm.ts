@@ -1,5 +1,5 @@
 import { signUp } from '@/lib/auth/client';
-import { SignupFormValues, SignupSchema } from '@/lib/auth/schema';
+import { SignupFormValues, SignupSchema } from '@/lib/schema/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
