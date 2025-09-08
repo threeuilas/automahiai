@@ -1,5 +1,5 @@
 import 'server-only';
-import { eq } from 'drizzle-orm';
+import { eq, sql } from 'drizzle-orm';
 
 import { db } from '@/lib/db';
 import { farmUser, farm } from '@/lib/db/schema';
@@ -18,7 +18,6 @@ export const listUserFarms = async (userId: string): Promise<Farm[]> => {
     id: farm.id,
     name: farm.name,
     description: farm.description,
-    createdAt: farm.createdAt,
   }));
 };
 
@@ -41,9 +40,25 @@ export const createFarm = async (
       id: newFarm.id,
       name: newFarm.name,
       description: newFarm.description,
-      createdAt: newFarm.createdAt,
     };
   });
+};
+
+export const updateFarm = async (
+  farmId: number,
+  updateData: Partial<InsertFarm>,
+): Promise<Farm | undefined> => {
+  const [updatedFarm] = await db
+    .update(farm)
+    .set({ ...updateData, updatedAt: sql`NOW()` })
+    .where(eq(farm.id, farmId))
+    .returning();
+
+  return {
+    id: updatedFarm.id,
+    name: updatedFarm.name,
+    description: updatedFarm.description,
+  };
 };
 
 export const deleteFarm = async (farmId: number): Promise<void> => {
@@ -72,7 +87,6 @@ export const getFarm = async (farmId: number): Promise<Farm | undefined> => {
         id: res.id,
         name: res.name,
         description: res.description,
-        createdAt: res.createdAt,
       }
     : undefined;
 };

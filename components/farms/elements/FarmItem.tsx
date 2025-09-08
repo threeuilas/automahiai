@@ -4,7 +4,7 @@ import { Trash2 } from 'lucide-react';
 import Link from 'next/link';
 
 import type { Farm } from '@/lib/schema/farms';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
 import { useDeleteFarm } from '../hooks/useDeleteFarm';
@@ -27,7 +27,10 @@ export function FarmItem({ farm }: FarmItemProps) {
             <Button
               variant="destructive"
               size="sm"
-              onClick={handleDelete}
+              onClick={(e) => {
+                e.preventDefault();
+                handleDelete();
+              }}
               disabled={isDeleting}
               className="ml-2"
             >
@@ -35,11 +38,6 @@ export function FarmItem({ farm }: FarmItemProps) {
             </Button>
           </div>
         </CardHeader>
-        <CardContent>
-          <p className="text-sm text-muted-foreground">
-            Created: {new Date(farm.createdAt).toLocaleDateString()}
-          </p>
-        </CardContent>
       </Card>
     </Link>
   );

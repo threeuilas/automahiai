@@ -5,7 +5,7 @@ const baseSchema = {
   password: z.string().min(8, 'Password must be at least 8 characters'),
 };
 
-export const SignupSchema = z
+export const signupSchema = z
   .object({
     ...baseSchema,
     name: z
@@ -22,11 +22,11 @@ export const SignupSchema = z
     path: ['confirmPassword'],
   });
 
-export type SignupFormValues = z.infer<typeof SignupSchema>;
+export type SignupFormValues = z.infer<typeof signupSchema>;
 
-export const LoginSchema = z.object({
+export const loginSchema = z.object({
   ...baseSchema,
   remember: z.boolean().optional(),
 });
 
-export type LoginFormValues = z.infer<typeof LoginSchema>;
+export type LoginFormValues = z.infer<typeof loginSchema>;

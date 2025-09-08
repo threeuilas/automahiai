@@ -22,7 +22,6 @@ describe('FarmItem', () => {
     id: 1,
     name: 'Test Farm',
     description: 'A test farm',
-    createdAt: new Date('2024-01-15T10:30:00Z'),
   };
 
   const mockRouter = {
@@ -47,10 +46,6 @@ describe('FarmItem', () => {
 
     // Check farm name
     expect(screen.getByText('Test Farm')).toBeInTheDocument();
-
-    // Check creation date
-    expect(screen.getByText(/Created:/)).toBeInTheDocument();
-    expect(screen.getByText(/1\/15\/2024/)).toBeInTheDocument();
 
     // Check delete button
     const deleteButton = screen.getByRole('button');
