@@ -1,0 +1,7 @@
+---
+description: Use PNPM
+globs:
+alwaysApply: true
+---
+
+- Use pnpm for this project instead of npm
