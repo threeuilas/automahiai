@@ -5,6 +5,7 @@ import type { crop, timestamps } from '@/lib/db/schema';
 const baseCropAttributesSchema = z.object({
   daysToMaturity: z.number(),
   quantityPerHarvest: z.number(),
+  quantityUnit: z.enum(['kg', 'g', 'lb', 'oz', 'count']),
   seedVendor: z.string(),
   seedsPerLinearFeet: z.number(),
   plantsPerLinearFeet: z.number(),

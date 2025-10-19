@@ -11,6 +11,7 @@ describe('CropList', () => {
         type: 'continuous_harvest' as const,
         daysToMaturity: 75,
         quantityPerHarvest: 10,
+        quantityUnit: 'kg' as const,
         seedVendor: 'Seed Co',
         seedsPerLinearFeet: 5,
         plantsPerLinearFeet: 3,
@@ -27,6 +28,7 @@ describe('CropList', () => {
         type: 'harvest_once' as const,
         daysToMaturity: 60,
         quantityPerHarvest: 20,
+        quantityUnit: 'g' as const,
         seedVendor: 'Garden Seeds',
         seedsPerLinearFeet: 8,
         plantsPerLinearFeet: 6,
@@ -69,8 +71,8 @@ describe('CropList', () => {
     expect(screen.getByText('Carrots')).toBeInTheDocument();
     expect(screen.getByText('75')).toBeInTheDocument();
     expect(screen.getByText('60')).toBeInTheDocument();
-    expect(screen.getByText('10')).toBeInTheDocument();
-    expect(screen.getByText('20')).toBeInTheDocument();
+    expect(screen.getByText('10 kg')).toBeInTheDocument();
+    expect(screen.getByText('20 g')).toBeInTheDocument();
     expect(screen.getByText('Seed Co')).toBeInTheDocument();
     expect(screen.getByText('Garden Seeds')).toBeInTheDocument();
     expect(screen.getByText('5')).toBeInTheDocument();

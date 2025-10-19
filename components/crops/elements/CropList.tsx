@@ -61,7 +61,10 @@ export function CropList({ crops }: CropListProps) {
                 </Badge>
               </TableCell>
               <TableCell>{crop.attributes.daysToMaturity}</TableCell>
-              <TableCell>{crop.attributes.quantityPerHarvest}</TableCell>
+              <TableCell>
+                {crop.attributes.quantityPerHarvest}{' '}
+                {crop.attributes.quantityUnit}
+              </TableCell>
               <TableCell>{crop.attributes.seedVendor}</TableCell>
               <TableCell>{crop.attributes.seedsPerLinearFeet}</TableCell>
               <TableCell>{crop.attributes.plantsPerLinearFeet}</TableCell>
