@@ -16,6 +16,7 @@ const formSchema = z.object({
   quantityPerHarvest: z
     .number()
     .min(1, 'Quantity per harvest must be at least 1'),
+  quantityUnit: z.enum(['kg', 'g', 'lb', 'oz', 'count']),
   seedVendor: z.string().min(1, 'Seed vendor is required'),
   seedsPerLinearFeet: z
     .number()
@@ -34,6 +35,7 @@ export function useCreateCrop() {
       type: 'harvest_once' as const,
       daysToMaturity: 0,
       quantityPerHarvest: 0,
+      quantityUnit: 'kg' as const,
       seedVendor: '',
       seedsPerLinearFeet: 0,
       plantsPerLinearFeet: 0,
@@ -57,6 +59,7 @@ export function useCreateCrop() {
               type: 'continuous_harvest' as const,
               daysToMaturity: formValues.daysToMaturity,
               quantityPerHarvest: formValues.quantityPerHarvest,
+              quantityUnit: formValues.quantityUnit,
               seedVendor: formValues.seedVendor,
               seedsPerLinearFeet: formValues.seedsPerLinearFeet,
               plantsPerLinearFeet: formValues.plantsPerLinearFeet,
@@ -66,6 +69,7 @@ export function useCreateCrop() {
               type: 'harvest_once' as const,
               daysToMaturity: formValues.daysToMaturity,
               quantityPerHarvest: formValues.quantityPerHarvest,
+              quantityUnit: formValues.quantityUnit,
               seedVendor: formValues.seedVendor,
               seedsPerLinearFeet: formValues.seedsPerLinearFeet,
               plantsPerLinearFeet: formValues.plantsPerLinearFeet,

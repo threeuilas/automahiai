@@ -35,6 +35,7 @@ export interface CreateCropFormValues {
   type: 'continuous_harvest' | 'harvest_once';
   daysToMaturity: number;
   quantityPerHarvest: number;
+  quantityUnit: 'kg' | 'g' | 'lb' | 'oz' | 'count';
   seedVendor: string;
   seedsPerLinearFeet: number;
   plantsPerLinearFeet: number;
@@ -121,23 +122,53 @@ export function CreateCropForm({ redirect = '/crops' }: CreateCropFormProps) {
               )}
             />
 
-            <FormField
-              name="quantityPerHarvest"
-              control={form.control}
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Quantity per Harvest</FormLabel>
-                  <FormControl>
-                    <NumberInput
-                      placeholder="Enter quantity per harvest"
-                      value={field.value}
-                      onChange={field.onChange}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="flex gap-2">
+              <FormField
+                name="quantityPerHarvest"
+                control={form.control}
+                render={({ field }) => (
+                  <FormItem className="flex-1">
+                    <FormLabel>Quantity per Harvest</FormLabel>
+                    <FormControl>
+                      <NumberInput
+                        placeholder="Enter quantity"
+                        value={field.value}
+                        onChange={field.onChange}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                name="quantityUnit"
+                control={form.control}
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Unit</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Unit" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="kg">kg</SelectItem>
+                        <SelectItem value="g">g</SelectItem>
+                        <SelectItem value="lb">lb</SelectItem>
+                        <SelectItem value="oz">oz</SelectItem>
+                        <SelectItem value="count">count</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
             <FormField
               name="seedVendor"
