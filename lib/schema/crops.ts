@@ -1,5 +1,7 @@
 import z from 'zod';
 
+import type { crop, timestamps } from '@/lib/db/schema';
+
 const baseCropAttributesSchema = z.object({
   daysToMaturity: z.number(),
   quantityPerHarvest: z.number(),
@@ -22,7 +24,18 @@ export const CropAttributeSchema = z.union([
   harvestOnceCropAttributesSchema,
 ]);
 
-export type CropAttributeSchemaType = z.infer<typeof CropAttributeSchema>;
+export const cropSchema = z.object({
+  id: z.number(),
+  name: z
+    .string()
+    .min(1, 'Crop name is required')
+    .max(100, 'Crop name must be less than 100 characters'),
+  attributes: CropAttributeSchema,
+}) satisfies z.ZodType<Omit<typeof crop.$inferSelect, keyof typeof timestamps>>;
+
+export const insertCropSchema = cropSchema.omit({
+  id: true,
+}) satisfies z.ZodType<Omit<typeof crop.$inferInsert, keyof typeof timestamps>>;
 
 export const createCropRequestSchema = z.object({
   name: z.string().min(1, 'Crop name is required'),
@@ -35,6 +48,8 @@ export const createCropResponseSchema = z.object({
   error: z.string().optional(),
 });
 
+export type Crop = z.infer<typeof cropSchema>;
+export type InsertCrop = z.infer<typeof insertCropSchema>;
+export type CropAttributeSchemaType = z.infer<typeof CropAttributeSchema>;
 export type CreateCropRequest = z.infer<typeof createCropRequestSchema>;
 export type CreateCropResponse = z.infer<typeof createCropResponseSchema>;
-

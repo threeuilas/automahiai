@@ -1,7 +1,7 @@
 import { integer, pgTable, text, jsonb } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
-import { CropAttributeSchemaType } from '@/lib/schema/crops';
+import type { CropAttributeSchemaType } from '@/lib/schema/crops';
 
 import { timestamps } from './helpers';
 import { farm } from './farm';
